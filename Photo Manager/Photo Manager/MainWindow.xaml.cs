@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Photo_Manager.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,45 @@ namespace Photo_Manager
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
+
+        private void btnAppLogo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddDirectory_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void btnMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            if(WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+            else
+                WindowState = WindowState.Maximized;
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = new MainViewModel();
         }
     }
 }

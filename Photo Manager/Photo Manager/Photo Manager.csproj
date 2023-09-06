@@ -8,4 +8,21 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Views\PhotoView.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\icons8-photo-64.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\icons8-photo-64.png" />
+    <Resource Include="Views\PhotoView.xaml.cs" />
+  </ItemGroup>
+
 </Project>
