@@ -4,9 +4,109 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Photo_Manager"
+        xmlns:views="clr-namespace:Photo_Manager.Views"
+        xmlns:viewmodels="clr-namespace:Photo_Manager.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Photo Manager" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        MouseDown="Window_MouseDown"
+        Background="#CAF0F8" Loaded="MainWindow_Loaded">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <DataTemplate x:Name="mainViewTemplate" DataType="{x:Type viewmodels:MainViewModel}">
+            <views:MainView DataContext="{Binding}" />
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid x:Name="mainAppGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid x:Name="mainAppBar" Background="#9900B4D8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="65" />
+                <ColumnDefinition Width="350" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="45" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnAppLogo"
+                    Background="#CCFFFFFF"
+                    Grid.Column="0"
+                    Click="btnAppLogo_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+                <Image Source="Assets/icons8-photo-64.png"></Image>
+            </Button>
+            <Button x:Name="btnAddDirectory"
+                    Width="250"
+                    Height="45"
+                    Content="Dodaj folder"
+                    FontSize="20"
+                    Background="#CCFFFFFF"
+                    Grid.Column="1"
+                    Click="btnAddDirectory_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="btnMinimize"
+                    Height="45"
+                    VerticalContentAlignment="Top"
+                    Content="-"
+                    FontSize="30"
+                    FontWeight="Bold"
+                    Background="#CCFFFFFF"
+                    Grid.Column="3"
+                    Click="btnMinimize_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="btnMaximize"
+                    Height="45"
+                    Content="🗖"
+                    VerticalContentAlignment="Top"
+                    FontSize="28"
+                    Background="#CCFFFFFF"
+                    Grid.Column="4"
+                    Click="btnMaximize_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="btnClose"
+                    Height="45"
+                    Content="x"
+                    VerticalContentAlignment="Top"
+                    FontSize="28"
+                    Background="#CCFFFFFF"
+                    Grid.Column="5"
+                    Click="btnClose_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+        <ContentControl Grid.Row="1" Content="{Binding}"/>
 
     </Grid>
 </Window>
