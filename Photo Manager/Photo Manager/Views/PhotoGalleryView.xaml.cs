@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,8 +24,34 @@ namespace Photo_Manager.Views
     public partial class PhotoGalleryView : UserControl
     {
         public PhotoGalleryView()
-        {
+        {   
             InitializeComponent();
         }
+
+        private void PhotoGalleryView_Loaded(object sender, RoutedEventArgs e)
+        {
+            string[] filesindirectory = Directory.GetFiles(@"C:\Git\Nowy folder");
+            foreach (var (s, newBtn) in from string s in filesindirectory
+                                        where Regex.IsMatch(s, @"\.jpg|\.png|\.jpeg")
+                                        let newBtn = new Button()
+                                        select (s, newBtn))
+            {
+                newBtn.Content = new Image
+                {
+                    Width = 180,
+                    Height = 180,
+                    Source = new BitmapImage(new Uri(s)),
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                newBtn.Background = new SolidColorBrush(Colors.Transparent);
+                PhotoGalleryStackPanel.Children.Add(newBtn);
+            }
+        }
+
+        private void btnPhoto(object sender, RoutedEventArgs e)
+        {
+
+        }
+        
     }
 }
