@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Photo_Manager.Views.AddDirectoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Photo_Manager.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="mainViewGrid">
+        <Grid x:Name="formGrid"
+              Background="#8000B4D8">
+            <StackPanel Width="500"
+                        Height="350">
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="20"
+                           Margin="5,25,5,10">Wpisz nazwę pod ktorą chcesz zapisać nową ścieżkę:</TextBlock>
+                <TextBox x:Name="newDirectoryName"
+                         HorizontalAlignment="Center"
+                         Width="450"
+                         Height="30"
+                         FontSize="20"
+                         Margin="5,20,5,10"></TextBox>
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="20"
+                           Margin="5,25,5,25">Wybierz nową ścieżkę do zapisania:</TextBlock>
+
+                <Button x:Name="btnChooseDirectory"
+                     Width="180"
+                     Height="60"
+                     Content="Wybierz ścieżkę"
+                     FontSize="20"
+                     Background="#CCFFFFFF">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Grid>
+                    <Button x:Name="btnSave"
+                        Width="150"
+                        Height="50"
+                        Content="Zapisz"
+                        FontSize="20"
+                        Background="#CCFFFFFF"
+                        Margin="0,35,0,0"
+                        HorizontalAlignment="Right">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="btnCancel"
+                        Width="150"
+                        Height="50"
+                        Content="Wróć"
+                        FontSize="20"
+                        Background="#CCFFFFFF"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Grid>
+                
+            </StackPanel>
+            
+        </Grid>
+            
+    </Grid>
+</UserControl>

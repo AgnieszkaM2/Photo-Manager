@@ -6,7 +6,32 @@
              xmlns:local="clr-namespace:Photo_Manager.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid x:Name="mainViewGrid"
+          Margin="0,20,0,0">
+        <Button Width="250"
+                 Height="45"
+                 Content="Filtruj"
+                 FontSize="22"
+                 Background="#CCFFFFFF"
+                VerticalAlignment="Top">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Grid x:Name="mainViewGridItems"
+              Margin="10,90,5,10">
+            <ListBox x:Name="savedDirectoriesListBox" 
+                 Background="Transparent" 
+                 Width="auto" 
+                 Height="auto" 
+                 VerticalAlignment="Top" 
+                 HorizontalAlignment="Left">
+
+            </ListBox>
             
+        </Grid>
+
     </Grid>
 </UserControl>

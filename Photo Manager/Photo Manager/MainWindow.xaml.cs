@@ -34,7 +34,7 @@ namespace Photo_Manager
 
         private void btnAppLogo_Click(object sender, RoutedEventArgs e)
         {
-
+            DataContext = new MainViewModel();
         }
 
         private void btnAddDirectory_Click(object sender, RoutedEventArgs e)
