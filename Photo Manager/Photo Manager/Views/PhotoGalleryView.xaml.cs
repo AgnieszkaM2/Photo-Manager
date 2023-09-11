@@ -30,7 +30,9 @@ namespace Photo_Manager.Views
 
         private void PhotoGalleryView_Loaded(object sender, RoutedEventArgs e)
         {
-            string[] filesindirectory = Directory.GetFiles(@"C:\Git\Nowy folder");
+            photoView.Visibility = Visibility.Hidden;
+
+            string[] filesindirectory = Directory.GetFiles(@"D:\memy");
             foreach (var (s, newBtn) in from string s in filesindirectory
                                         where Regex.IsMatch(s, @"\.jpg|\.png|\.jpeg")
                                         let newBtn = new Button()
@@ -42,8 +44,10 @@ namespace Photo_Manager.Views
                     Height = 180,
                     Source = new BitmapImage(new Uri(s)),
                     VerticalAlignment = VerticalAlignment.Center
+                    
                 };
                 newBtn.Background = new SolidColorBrush(Colors.Transparent);
+                newBtn.Click += new RoutedEventHandler(btnPhotoView);
                 PhotoGalleryStackPanel.Children.Add(newBtn);
             }
         }
@@ -52,6 +56,12 @@ namespace Photo_Manager.Views
         {
 
         }
-        
+
+        private void btnPhotoView(object sender, RoutedEventArgs e)
+        {
+            photoView.Visibility = Visibility.Visible;
+            mainViewGridFrame.Visibility = Visibility.Hidden;
+        }
+
     }
 }

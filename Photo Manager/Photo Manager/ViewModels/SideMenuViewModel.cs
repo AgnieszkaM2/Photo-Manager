@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Photo_Manager.ViewModels
 {
-    class SideMenuViewModel
+    public class SideMenuViewModel : BaseViewModel
     {
     }
 }

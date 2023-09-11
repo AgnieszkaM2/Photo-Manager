@@ -7,31 +7,34 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid x:Name="mainViewGrid"
-          Margin="0,20,0,0">
-        <Button Width="250"
+    <Grid x:Name="mainViewGrid">
+
+        <Grid x:Name="mainViewGridFrame"
+              Margin="0,20,0,0">
+            
+            <Button Width="250"
                  Height="45"
                  Content="Galerie zdjęć"
                  FontSize="22"
                  Background="#CCFFFFFF"
                 VerticalAlignment="Top">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Grid x:Name="mainViewGridItems"
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Grid x:Name="mainViewGridItems"
               Margin="10,90,5,10">
-            <ListBox x:Name="savedDirectoriesListBox" 
+                <ListBox x:Name="savedDirectoriesListBox" 
                  Background="Transparent" 
                  Width="auto" 
                  Height="auto" 
                  VerticalAlignment="Top" 
                  HorizontalAlignment="Left">
 
-            </ListBox>
-            <Button x:Name="btnAddNewDirectory" 
+                </ListBox>
+                <Button x:Name="btnAddNewDirectory" 
                 Background="#6600B4D8"
                 Content="+"
                 FontSize="70"
@@ -40,14 +43,17 @@
                 Height="189"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
-                Click="btnAddNewDirectory_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="20"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+                Click="btnAddNewDirectory_Click"
+                >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="20"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
         </Grid>
+        
 
     </Grid>
 </UserControl>

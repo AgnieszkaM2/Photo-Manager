@@ -1,4 +1,6 @@
-﻿using Photo_Manager.ViewModels;
+﻿using Photo_Manager.Commands;
+using Photo_Manager.ViewModels;
+using Photo_Manager.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,8 @@ namespace Photo_Manager
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = new MainWindowViewModel();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -34,12 +38,17 @@ namespace Photo_Manager
 
         private void btnAppLogo_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new MainViewModel();
+            //DataContext = new MainViewModel();
+            mainView.Visibility = Visibility.Visible;
+            addDirectory.Visibility = Visibility.Hidden;
+            photoGallery.Visibility = Visibility.Hidden;
         }
 
         private void btnAddDirectory_Click(object sender, RoutedEventArgs e)
         {
-
+            addDirectory.Visibility = Visibility.Visible;
+            mainView.Visibility = Visibility.Hidden;
+            photoGallery.Visibility = Visibility.Hidden;
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
@@ -62,7 +71,11 @@ namespace Photo_Manager
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = new MainViewModel();
+            //DataContext = new MainViewModel();
+            photoGallery.Visibility = Visibility.Visible;
+            addDirectory.Visibility = Visibility.Hidden;
+            mainView.Visibility = Visibility.Hidden;
+
         }
     }
 }

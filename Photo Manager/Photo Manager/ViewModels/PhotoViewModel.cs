@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Photo_Manager.ViewModels
 {
-    class PhotoViewModel
+    public class PhotoViewModel : BaseViewModel
     {
     }
 }

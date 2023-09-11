@@ -23,6 +23,19 @@ namespace Photo_Manager.Views
         public AddDirectoryView()
         {
             InitializeComponent();
+            mainView.Visibility = Visibility.Hidden;
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            formGrid.Visibility = Visibility.Hidden;
+            mainView.Visibility = Visibility.Visible;
+        }
+
+        private void AddDirectory_Loaded(object sender, RoutedEventArgs e)
+        {
+            mainView.Visibility = Visibility.Hidden;
+            formGrid.Visibility = Visibility.Visible;
         }
     }
 }

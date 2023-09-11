@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Photo_Manager.ViewModels
 {
-    public class AddDirectoryViewModel : BaseViewModel
+    public class ErrorViewModel : BaseViewModel
     {
     }
 }

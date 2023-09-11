@@ -2,8 +2,31 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Photo_Manager"
+             xmlns:views="clr-namespace:Photo_Manager.Views"
+             xmlns:viewmodels="clr-namespace:Photo_Manager.ViewModels"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">
+            <views:MainView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:MainWindowViewModel}">
+            <local:MainWindow/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:AddDirectoryViewModel}">
+            <views:AddDirectoryView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:PhotoGalleryViewModel}">
+            <views:PhotoGalleryView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:PhotoViewModel}">
+            <views:PhotoView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:SideMenuViewModel}">
+            <views:SideMenuView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ErrorViewModel}">
+            <views:ErrorView/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

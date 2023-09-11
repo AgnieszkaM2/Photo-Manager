@@ -6,27 +6,35 @@
              xmlns:local="clr-namespace:Photo_Manager.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="mainViewGrid"
-          Margin="0,20,0,0">
-        <Button Width="250"
+    <Grid x:Name="mainViewGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <local:PhotoView x:Name="photoView"/>
+        <Grid x:Name="mainViewGridFrame"
+              Margin="0,20,0,0">
+            <Button Width="250"
                  Height="45"
                  Content="Filtruj"
                  FontSize="22"
                  Background="#CCFFFFFF"
                 VerticalAlignment="Top">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Grid x:Name="mainViewGridItems"
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Grid x:Name="mainViewGridItems"
               Margin="10,90,5,10" Loaded="PhotoGalleryView_Loaded">
-            <ScrollViewer>
-                <WrapPanel  x:Name="PhotoGalleryStackPanel">
-                </WrapPanel>
-            </ScrollViewer>
+                <ScrollViewer>
+                    <WrapPanel  x:Name="PhotoGalleryStackPanel">
+                    </WrapPanel>
+                </ScrollViewer>
+            </Grid>
         </Grid>
+        <local:SideMenuView Grid.Column="1"/>
 
     </Grid>
 </UserControl>
