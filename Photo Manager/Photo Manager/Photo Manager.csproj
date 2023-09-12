@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Assets\icons8-photo-64.png" />
     <Resource Include="Views\PhotoView.xaml.cs" />
   </ItemGroup>

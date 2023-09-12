@@ -1,6 +1,8 @@
 ﻿using Photo_Manager.Commands;
+using Photo_Manager.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,34 +12,30 @@ namespace Photo_Manager.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        private BaseViewModel _selectedViewModel;
-        //private BaseViewModel _selectedSideMenu;
+        private INavigationService _navigation;
 
-        public BaseViewModel SelectedViewModel
+        public INavigationService Navigation
         {
-            get { return _selectedViewModel; }
+            get => _navigation;
             set
             {
-                _selectedViewModel = value;
-                OnPropertyChanged(nameof(SelectedViewModel));
+                _navigation = value;
+                OnPropertyChanged();
             }
         }
 
-        //public BaseViewModel SelectedSideMenu 
-        //{
-        //    get { return _selectedSideMenu; }
-        //    set 
-        //    { 
-        //        _selectedSideMenu = value;
-        //        OnPropertyChanged(nameof(SelectedSideMenu));
-        //    }
-        //}
+        public ICommand NavigateMainViewCommand { get; set; }
+        public ICommand NavigateAddDirectoryViewCommand { get; set; }
+        public ICommand NavigatePhotoGalleryViewCommand { get; set; }
+        public ICommand NavigatePhotoViewCommand { get; set; }
 
-        public ICommand UpdateViewCommand { get; set; }
-
-        public MainWindowViewModel()
+        public MainWindowViewModel(INavigationService navService)
         {
-            UpdateViewCommand = new UpdateViewCommand(this);
+            _navigation = navService;
+            NavigateMainViewCommand = new UpdateViewCommand(o => { Navigation.NavigateTO<MainViewModel>(); }, o => true);
+            NavigateAddDirectoryViewCommand = new UpdateViewCommand(o => { Navigation.NavigateTO<AddDirectoryViewModel>(); }, o => true);
+            NavigatePhotoGalleryViewCommand = new UpdateViewCommand(o => { Navigation.NavigateTO<PhotoGalleryViewModel>(); }, o => true);
+            NavigatePhotoViewCommand = new UpdateViewCommand(o => { Navigation.NavigateTO<PhotoViewModel>(); }, o => true);
         }
     }
 }

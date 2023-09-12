@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualBasic;
+using Photo_Manager.Commands;
+using Photo_Manager.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,11 +25,15 @@ namespace Photo_Manager.Views
     /// </summary>
     public partial class MainView : UserControl
     {
+       
 
         public MainView()
         {
             InitializeComponent();
+
         }
+
+        
 
         private void btnAddNewDirectory_Click(object sender, RoutedEventArgs e)
         {
@@ -38,11 +44,12 @@ namespace Photo_Manager.Views
             //{
             //    images.Add(String.Format("~/Images/{0}", System.IO.Path.GetFileName(s)));
             //}
-
-            mainViewGridFrame.Visibility = Visibility.Hidden;
-           // addDirectory.Visibility = Visibility.Visible;
         
 
+        }
+
+        private void btnGallery_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

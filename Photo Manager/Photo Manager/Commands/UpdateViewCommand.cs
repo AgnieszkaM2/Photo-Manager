@@ -11,46 +11,29 @@ namespace Photo_Manager.Commands
     public class UpdateViewCommand : ICommand
 
     {
-        private MainWindowViewModel viewModel;
-        public UpdateViewCommand(MainWindowViewModel viewModel) 
+        private readonly Predicate<object> _canExecute;
+        private readonly Action<object> _execute;
+
+        public UpdateViewCommand(Action<object> execute, Predicate<object> canExecute )
         {
-            this.viewModel = viewModel;
+            _canExecute = canExecute;
+            _execute = execute;
         }
 
-        public event EventHandler? CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
 
         public bool CanExecute(object? parameter)
         {
-            return true;
+            return _canExecute(parameter);
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
-            Console.WriteLine("test");
-            if (parameter.ToString() == "Home")
-            {
-                viewModel.SelectedViewModel = new MainViewModel();
-            }
-            else if (parameter.ToString() == "AddDirectory")
-            {
-                viewModel.SelectedViewModel = new AddDirectoryViewModel();
-            }
-            else if (parameter.ToString() == "PhotoGallery")
-            {
-                viewModel.SelectedViewModel = new PhotoGalleryViewModel();
-            }
-            else if (parameter.ToString() == "Photo")
-            {
-                viewModel.SelectedViewModel = new PhotoViewModel();
-            }
-            //else if (parameter.ToString() == "SideMenu")
-            //{
-            //    viewModel.SelectedSideMenu = new SideMenuViewModel();
-            //}
-            else if (parameter.ToString() == "Error")
-            {
-                viewModel.SelectedViewModel = new ErrorViewModel();
-            }
+            _execute(parameter);
         }
     }
 }

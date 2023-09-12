@@ -11,7 +11,6 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <local:PhotoView x:Name="photoView"/>
         <Grid x:Name="mainViewGridFrame"
               Margin="0,20,0,0">
             <Button Width="250"
