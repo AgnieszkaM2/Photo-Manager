@@ -108,8 +108,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <!--<views:MainView x:Name="mainView"/>-->
-            <ContentControl Grid.Column="0" Content="{Binding Navigation.CurrentViewModel}"/>
+            <ContentControl x:Name="mainFrame" Grid.Column="0" Content="{Binding Navigation.CurrentViewModel}"/>
         </Grid>
 
     </Grid>

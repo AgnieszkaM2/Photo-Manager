@@ -28,7 +28,7 @@
             <Grid x:Name="mainViewGridItems"
               Margin="10,90,5,10" Loaded="PhotoGalleryView_Loaded">
                 <ScrollViewer>
-                    <WrapPanel  x:Name="PhotoGalleryStackPanel">
+                    <WrapPanel  x:Name="PhotoGalleryStackPanel" HorizontalAlignment="Center">
                     </WrapPanel>
                 </ScrollViewer>
             </Grid>

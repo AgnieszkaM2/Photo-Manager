@@ -12,6 +12,7 @@ namespace Photo_Manager.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
+
         private INavigationService _navigation;
 
         public INavigationService Navigation
@@ -32,6 +33,7 @@ namespace Photo_Manager.ViewModels
         public MainWindowViewModel(INavigationService navService)
         {
             _navigation = navService;
+            Navigation.NavigateTO<MainViewModel>();
             NavigateMainViewCommand = new UpdateViewCommand(o => { Navigation.NavigateTO<MainViewModel>(); }, o => true);
             NavigateAddDirectoryViewCommand = new UpdateViewCommand(o => { Navigation.NavigateTO<AddDirectoryViewModel>(); }, o => true);
             NavigatePhotoGalleryViewCommand = new UpdateViewCommand(o => { Navigation.NavigateTO<PhotoGalleryViewModel>(); }, o => true);

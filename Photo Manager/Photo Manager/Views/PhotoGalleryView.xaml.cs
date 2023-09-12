@@ -46,6 +46,7 @@ namespace Photo_Manager.Views
                     
                 };
                 newBtn.Background = new SolidColorBrush(Colors.Transparent);
+                newBtn.Margin = new Thickness(5);
                 newBtn.Click += new RoutedEventHandler(btnPhotoView);
                 newBtn.SetBinding(Button.CommandProperty, new Binding("NavigatePhotoViewCommand"));
                 PhotoGalleryStackPanel.Children.Add(newBtn);
