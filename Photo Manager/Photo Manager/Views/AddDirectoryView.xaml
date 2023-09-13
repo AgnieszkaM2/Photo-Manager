@@ -29,7 +29,7 @@
                      Height="60"
                      Content="Wybierz ścieżkę"
                      FontSize="20"
-                     Background="#CCFFFFFF">
+                     Background="#CCFFFFFF" Click="btnChooseDirectory_Click">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -44,7 +44,7 @@
                         FontSize="20"
                         Background="#CCFFFFFF"
                         Margin="0,35,0,0"
-                        HorizontalAlignment="Right">
+                        HorizontalAlignment="Right" Click="btnSave_Click">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"/>

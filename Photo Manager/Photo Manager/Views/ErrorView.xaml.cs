@@ -19,9 +19,10 @@ namespace Photo_Manager.Views
     /// </summary>
     public partial class ErrorView : Window
     {
-        public ErrorView()
+        public ErrorView(string _errortext)
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            errortext.Text = _errortext;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Photo_Manager.Views
         private void PhotoGalleryView_Loaded(object sender, RoutedEventArgs e)
         {
 
-            string[] filesindirectory = Directory.GetFiles(@"D:\memy");
+            string[] filesindirectory = Directory.GetFiles(@"C:\Git\Nowy folder");
             foreach (var (s, newBtn) in from string s in filesindirectory
                                         where Regex.IsMatch(s, @"\.jpg|\.png|\.jpeg")
                                         let newBtn = new Button()

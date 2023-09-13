@@ -13,7 +13,8 @@
         <TextBlock VerticalAlignment="Top"
                    HorizontalAlignment="Center"
                    FontSize="20"> Wystąpił błąd </TextBlock>
-        <TextBlock VerticalAlignment="Center"
+        <TextBlock x:Name="errortext"
+                   VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="18">Błąd[tekst] </TextBlock>
         <TextBlock VerticalAlignment="Bottom"
