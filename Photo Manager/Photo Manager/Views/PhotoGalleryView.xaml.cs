@@ -30,7 +30,6 @@ namespace Photo_Manager.Views
 
         private void PhotoGalleryView_Loaded(object sender, RoutedEventArgs e)
         {
-            photoView.Visibility = Visibility.Hidden;
 
             string[] filesindirectory = Directory.GetFiles(@"C:\Git\Nowy folder");
             foreach (var (s, newBtn) in from string s in filesindirectory
@@ -47,7 +46,9 @@ namespace Photo_Manager.Views
                     
                 };
                 newBtn.Background = new SolidColorBrush(Colors.Transparent);
+                newBtn.Margin = new Thickness(5);
                 newBtn.Click += new RoutedEventHandler(btnPhotoView);
+                newBtn.SetBinding(Button.CommandProperty, new Binding("NavigatePhotoViewCommand"));
                 PhotoGalleryStackPanel.Children.Add(newBtn);
             }
         }
@@ -59,8 +60,6 @@ namespace Photo_Manager.Views
 
         private void btnPhotoView(object sender, RoutedEventArgs e)
         {
-            photoView.Visibility = Visibility.Visible;
-            mainViewGridFrame.Visibility = Visibility.Hidden;
         }
 
     }

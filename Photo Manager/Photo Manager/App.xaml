@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:Photo_Manager"
              xmlns:views="clr-namespace:Photo_Manager.Views"
              xmlns:viewmodels="clr-namespace:Photo_Manager.ViewModels"
-             StartupUri="MainWindow.xaml">
+             >
     <Application.Resources>
         <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">
             <views:MainView/>

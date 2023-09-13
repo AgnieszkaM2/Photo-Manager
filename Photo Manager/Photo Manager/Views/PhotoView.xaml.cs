@@ -20,6 +20,7 @@ namespace Photo_Manager.Views
     /// </summary>
     public partial class PhotoView : UserControl
     {
+
         public PhotoView()
         {
             InitializeComponent();

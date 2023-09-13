@@ -12,12 +12,15 @@
         <Grid x:Name="mainViewGridFrame"
               Margin="0,20,0,0">
             
-            <Button Width="250"
+            <Button x:Name="btnGallery" 
+                 Width="250"
                  Height="45"
                  Content="Galerie zdjęć"
                  FontSize="22"
                  Background="#CCFFFFFF"
-                VerticalAlignment="Top">
+                VerticalAlignment="Top"
+                Click="btnGallery_Click"
+                Command="{Binding NavigatePhotoGalleryViewCommand}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -44,7 +47,7 @@
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
                 Click="btnAddNewDirectory_Click"
-                >
+                Command="{Binding NavigateAddDirectoryViewCommand}">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="20"/>
