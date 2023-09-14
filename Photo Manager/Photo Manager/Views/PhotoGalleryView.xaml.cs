@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -23,15 +24,17 @@ namespace Photo_Manager.Views
     /// </summary>
     public partial class PhotoGalleryView : UserControl
     {
+
+
         public PhotoGalleryView()
-        {   
+        {
             InitializeComponent();
         }
 
         private void PhotoGalleryView_Loaded(object sender, RoutedEventArgs e)
         {
-
-            string[] filesindirectory = Directory.GetFiles(@"C:\Git\Nowy folder");
+            
+            string[] filesindirectory = Directory.GetFiles(@"C:\\Git\\Nowy folder");
             foreach (var (s, newBtn) in from string s in filesindirectory
                                         where Regex.IsMatch(s, @"\.jpg|\.png|\.jpeg")
                                         let newBtn = new Button()

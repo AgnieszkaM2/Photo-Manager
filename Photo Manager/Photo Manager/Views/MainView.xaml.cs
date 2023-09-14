@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using Photo_Manager.Commands;
 using Photo_Manager.ViewModels;
 using System;
@@ -30,10 +31,7 @@ namespace Photo_Manager.Views
         public MainView()
         {
             InitializeComponent();
-
         }
-
-        
 
         private void btnAddNewDirectory_Click(object sender, RoutedEventArgs e)
         {
@@ -45,11 +43,45 @@ namespace Photo_Manager.Views
             //    images.Add(String.Format("~/Images/{0}", System.IO.Path.GetFileName(s)));
             //}
         
-
         }
 
         private void btnGallery_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void mainViewGridItems_Loaded(object sender, RoutedEventArgs e)
+        {
+            string _path = @".\date.json";
+
+            if (!File.Exists(_path)) File.CreateText(_path).Close();
+
+            var jsonData = System.IO.File.ReadAllText(_path);
+            var dirList = JsonConvert.DeserializeObject<List<jsonfile>>(jsonData) ?? new List<jsonfile>();
+
+            foreach (var (i, newBtn, _label, _stackPanel) in from i in dirList
+                                                             let newBtn = new Button()
+                                                             let _label = new Label()
+                                                             let _stackPanel = new StackPanel()
+                                                             select (i, newBtn, _label, _stackPanel))
+            {
+                _label.Content = i.dir.ToString()[(i.dir.ToString().LastIndexOf("\\")..)];
+                newBtn.Content = new Image
+                {
+                    Width = 180,
+                    Height = 180,
+                    Source = new BitmapImage(new Uri(@"C:\Git\Photo_Manager\Photo Manager\Photo Manager\Assets\icons8-photo-64.png")),
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
+
+                newBtn.Background = new SolidColorBrush(Colors.Transparent);
+                newBtn.Margin = new Thickness(5);
+                newBtn.SetBinding(Button.CommandProperty, new Binding("NavigatePhotoGalleryViewCommand"));
+
+                _stackPanel.Children.Add(newBtn);
+                _stackPanel.Children.Add(_label);
+
+                MainGalleryStackPanel.Children.Add(_stackPanel);
+            }
         }
     }
 }
