@@ -69,7 +69,7 @@ namespace Photo_Manager.Views
                 {
                     Width = 180,
                     Height = 180,
-                    Source = new BitmapImage(new Uri(@"D:\Desktop\Photo-Manager\Photo Manager\Photo Manager\Assets\icons8-photo-64.png")),
+                   // Source = new BitmapImage(new Uri(@"D:\Desktop\Photo-Manager\Photo Manager\Photo Manager\Assets\icons8-photo-64.png")),
                     VerticalAlignment = VerticalAlignment.Center,
                 };
 
