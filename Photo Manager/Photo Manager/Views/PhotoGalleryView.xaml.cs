@@ -37,11 +37,19 @@ namespace Photo_Manager.Views
         {
             string imagesDir = BaseResource.ChosenPath;
             string[] filesindirectory = Directory.GetFiles(@imagesDir);
-            foreach (var (s, newBtn) in from string s in filesindirectory
-                                        where Regex.IsMatch(s, @"\.jpg|\.png|\.jpeg")
-                                        let newBtn = new Button()
-                                        select (s, newBtn))
+            foreach (var (s, newBtn, contextMenu) in from string s in filesindirectory
+                                                     where Regex.IsMatch(s, @"\.jpg|\.png|\.jpeg")
+                                                     let newBtn = new Button()
+                                                     let contextMenu = new ContextMenu()
+                                                     select (s, newBtn, contextMenu))
             {
+                MenuItem menuItem = new MenuItem();
+                menuItem.Header = "clipboard";
+                menuItem.Click += new RoutedEventHandler(clipboard_onclick);
+                menuItem.Tag = s;
+
+                contextMenu.Items.Add(menuItem);
+
                 newBtn.Content = new Image
                 {
                     Width = 180,
@@ -54,9 +62,17 @@ namespace Photo_Manager.Views
                 newBtn.Margin = new Thickness(5);
                 newBtn.Click += new RoutedEventHandler(btnPhotoView);
                 newBtn.SetBinding(Button.CommandProperty, new Binding("NavigatePhotoViewCommand"));
+
+                newBtn.ContextMenu = contextMenu;
+                
                 newBtn.Tag = s;
+
                 PhotoGalleryStackPanel.Children.Add(newBtn);
             }
+        }
+        private void clipboard_onclick(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetImage(new BitmapImage(new Uri(((MenuItem)sender).Tag.ToString())));
         }
 
         private void btnPhoto(object sender, RoutedEventArgs e)
@@ -71,5 +87,9 @@ namespace Photo_Manager.Views
             BaseResource.ChosenImage= (string)selectedImgDir;
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

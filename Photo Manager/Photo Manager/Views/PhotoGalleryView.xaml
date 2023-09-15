@@ -36,4 +36,5 @@
         <local:SideMenuView Grid.Column="1"/>
 
     </Grid>
+    
 </UserControl>
