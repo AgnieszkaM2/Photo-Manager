@@ -42,6 +42,8 @@ namespace Photo_Manager.Views
                                         let newBtn = new Button()
                                         select (s, newBtn))
             {
+                
+
                 newBtn.Content = new Image
                 {
                     Width = 180,
@@ -54,11 +56,19 @@ namespace Photo_Manager.Views
                 newBtn.Margin = new Thickness(5);
                 newBtn.Click += new RoutedEventHandler(btnPhotoView);
                 newBtn.SetBinding(Button.CommandProperty, new Binding("NavigatePhotoViewCommand"));
+                newBtn.ContextMenu = (ContextMenu)Resources["contextMenu"];
+
                 newBtn.Tag = s;
                 PhotoGalleryStackPanel.Children.Add(newBtn);
             }
         }
+        private void clipboard_onclick(object sender, RoutedEventArgs e)
+        {
+            Button _Button = e.Source as Button;
+           // var a = _Button.Content(ImageSource);
+           // Clipboard.SetImage(new BitmapImage(new Uri()));
 
+        }
         private void btnPhoto(object sender, RoutedEventArgs e)
         {
             
@@ -71,5 +81,9 @@ namespace Photo_Manager.Views
             BaseResource.ChosenImage= (string)selectedImgDir;
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
