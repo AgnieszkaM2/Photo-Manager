@@ -69,19 +69,27 @@ namespace Photo_Manager.Views
                 {
                     Width = 180,
                     Height = 180,
-                    Source = new BitmapImage(new Uri(@"C:\Git\Photo_Manager\Photo Manager\Photo Manager\Assets\icons8-photo-64.png")),
+                    Source = new BitmapImage(new Uri(@"D:\Desktop\Photo-Manager\Photo Manager\Photo Manager\Assets\icons8-photo-64.png")),
                     VerticalAlignment = VerticalAlignment.Center,
                 };
 
                 newBtn.Background = new SolidColorBrush(Colors.Transparent);
                 newBtn.Margin = new Thickness(5);
                 newBtn.SetBinding(Button.CommandProperty, new Binding("NavigatePhotoGalleryViewCommand"));
-
+                newBtn.Click += new RoutedEventHandler(btnGalleryView);
+                newBtn.Tag = i.dir;
                 _stackPanel.Children.Add(newBtn);
                 _stackPanel.Children.Add(_label);
 
                 MainGalleryStackPanel.Children.Add(_stackPanel);
             }
         }
+
+        private void btnGalleryView(object sender, RoutedEventArgs e)
+        {
+            var selectedDir = ((Button)sender).Tag;
+            BaseResource.ChosenPath= (string)selectedDir;
+        }
+
     }
 }

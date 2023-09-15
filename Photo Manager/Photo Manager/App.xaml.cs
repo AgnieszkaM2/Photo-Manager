@@ -24,7 +24,7 @@ namespace Photo_Manager
             services.AddSingleton<MainWindow>(provider => new MainWindow
             {
                 DataContext = provider.GetRequiredService<MainWindowViewModel>()
-            }) ;
+        }) ;
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<PhotoGalleryViewModel>();

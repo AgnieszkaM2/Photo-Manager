@@ -1,9 +1,11 @@
 ﻿using Microsoft.Win32;
+using Photo_Manager.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -33,8 +35,8 @@ namespace Photo_Manager.Views
 
         private void PhotoGalleryView_Loaded(object sender, RoutedEventArgs e)
         {
-            
-            string[] filesindirectory = Directory.GetFiles(@"C:\\Git\\Nowy folder");
+            string imagesDir = BaseResource.ChosenPath;
+            string[] filesindirectory = Directory.GetFiles(@imagesDir);
             foreach (var (s, newBtn) in from string s in filesindirectory
                                         where Regex.IsMatch(s, @"\.jpg|\.png|\.jpeg")
                                         let newBtn = new Button()
@@ -52,17 +54,21 @@ namespace Photo_Manager.Views
                 newBtn.Margin = new Thickness(5);
                 newBtn.Click += new RoutedEventHandler(btnPhotoView);
                 newBtn.SetBinding(Button.CommandProperty, new Binding("NavigatePhotoViewCommand"));
+                newBtn.Tag = s;
                 PhotoGalleryStackPanel.Children.Add(newBtn);
             }
         }
 
         private void btnPhoto(object sender, RoutedEventArgs e)
         {
+            
 
         }
 
         private void btnPhotoView(object sender, RoutedEventArgs e)
         {
+            var selectedImgDir = ((Button)sender).Tag;
+            BaseResource.ChosenImage= (string)selectedImgDir;
         }
 
     }

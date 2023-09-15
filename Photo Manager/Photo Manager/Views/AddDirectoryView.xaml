@@ -44,7 +44,9 @@
                         FontSize="20"
                         Background="#CCFFFFFF"
                         Margin="0,35,0,0"
-                        HorizontalAlignment="Right" Click="btnSave_Click">
+                        HorizontalAlignment="Right" 
+                        Click="btnSave_Click"
+                        Command="{Binding NavigateMainViewCommand}">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"/>

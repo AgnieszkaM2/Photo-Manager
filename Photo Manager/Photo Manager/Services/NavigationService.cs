@@ -1,6 +1,7 @@
 ﻿using Photo_Manager.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,7 @@ namespace Photo_Manager.Services
         {
             BaseViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
             CurrentViewModel = viewModel;
+            
         }
 
     }

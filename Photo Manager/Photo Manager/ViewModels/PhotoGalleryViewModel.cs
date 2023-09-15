@@ -11,6 +11,7 @@ namespace Photo_Manager.ViewModels
 {
     public class PhotoGalleryViewModel : BaseViewModel
     {
+
         private INavigationService _navigation;
 
         public INavigationService Navigation
@@ -37,5 +38,6 @@ namespace Photo_Manager.ViewModels
             NavigatePhotoViewCommand = new UpdateViewCommand(o => { Navigation.NavigateTO<PhotoViewModel>(); }, o => true);
 
         }
+
     }
 }

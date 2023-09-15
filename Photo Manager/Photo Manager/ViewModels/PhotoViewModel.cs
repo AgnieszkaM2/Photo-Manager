@@ -22,6 +22,7 @@ namespace Photo_Manager.ViewModels
                 OnPropertyChanged();
             }
         }
+        
 
         public ICommand NavigateMainViewCommand { get; set; }
         public ICommand NavigateAddDirectoryViewCommand { get; set; }
@@ -35,6 +36,8 @@ namespace Photo_Manager.ViewModels
             NavigateAddDirectoryViewCommand = new UpdateViewCommand(o => { Navigation.NavigateTO<AddDirectoryViewModel>(); }, o => true);
             NavigatePhotoGalleryViewCommand = new UpdateViewCommand(o => { Navigation.NavigateTO<PhotoGalleryViewModel>(); }, o => true);
             NavigatePhotoViewCommand = new UpdateViewCommand(o => { Navigation.NavigateTO<PhotoViewModel>(); }, o => true);
+
         }
+
     }
 }

@@ -20,7 +20,7 @@
                  Background="#CCFFFFFF"
                 VerticalAlignment="Top"
                 Click="btnGallery_Click"
-                Command="{Binding NavigatePhotoGalleryViewCommand}">
+                >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
