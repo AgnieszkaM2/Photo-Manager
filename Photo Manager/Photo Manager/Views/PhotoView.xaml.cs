@@ -32,11 +32,8 @@ namespace Photo_Manager.Views
         private void PhotoView_Loaded(object sender, RoutedEventArgs e)
         {
             var imageDir = BaseResource.ChosenImage;
-            int imageDirIndex = BaseResource.CurrentGallery.IndexOf(imageDir);
-            MediaElement mediaElement = new MediaElement();
-            
+            int imageDirIndex = BaseResource.CurrentGallery.IndexOf(imageDir); 
             mediaElement.Source = (new Uri(BaseResource.CurrentGallery[imageDirIndex]));
-            imageWindow.Children.Add(mediaElement);
         }
         
         public void btnReturnToGallery_Click(object sender, RoutedEventArgs e)
@@ -53,10 +50,10 @@ namespace Photo_Manager.Views
         {
             var imageDir = BaseResource.ChosenImage;
             int imageDirIndex = BaseResource.CurrentGallery.IndexOf(imageDir);
-            if(imageDirIndex < (BaseResource.CurrentGallery.Count-1))
+            if (imageDirIndex < (BaseResource.CurrentGallery.Count-1))
             {
                 imageDirIndex += 1;
-                displayedPhoto.Source = new BitmapImage(new Uri(BaseResource.CurrentGallery[imageDirIndex]));
+                mediaElement.Source = (new Uri(BaseResource.CurrentGallery[imageDirIndex]));
                 BaseResource.ChosenImage = BaseResource.CurrentGallery[imageDirIndex];
 
             }
@@ -71,7 +68,7 @@ namespace Photo_Manager.Views
             if (imageDirIndex != 0)
             {
                 imageDirIndex -= 1;
-                displayedPhoto.Source = new BitmapImage(new Uri(BaseResource.CurrentGallery[imageDirIndex]));
+                mediaElement.Source = (new Uri(BaseResource.CurrentGallery[imageDirIndex]));
                 BaseResource.ChosenImage = BaseResource.CurrentGallery[imageDirIndex];
 
             }
@@ -80,7 +77,7 @@ namespace Photo_Manager.Views
         private void imageWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var _sender = ((Grid)sender);
-            var _mediaElement = (MediaElement)_sender.Children[1];
+            var _mediaElement = (MediaElement)_sender.Children[0];
             if (Regex.IsMatch(_mediaElement.Source.ToString(), @"\.mp4|\.webm"))
             {
                 if (_mediaElement.LoadedBehavior != MediaState.Manual)
@@ -93,20 +90,6 @@ namespace Photo_Manager.Views
             }
         }
 
-        private void imageWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var _sender = ((Grid)sender);
-            var _mediaElement = (MediaElement)_sender.Children[1];
-            if (Regex.IsMatch(_mediaElement.Source.ToString(), @"\.mp4|\.webm"))
-            {
-                if (_mediaElement.LoadedBehavior != MediaState.Manual)
-                {
-                    _mediaElement.LoadedBehavior = MediaState.Manual;
-                }
-                _mediaElement.Close();
-                _mediaElement.Position = TimeSpan.Zero;
-                _mediaElement.Play();
-            }
-        }
+        
     }
 }

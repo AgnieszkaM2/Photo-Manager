@@ -68,7 +68,7 @@
                   Height="350"
                   Width="400"
                   VerticalAlignment="Top" MouseLeftButtonDown="imageWindow_MouseLeftButtonDown">
-                    <Image x:Name="displayedPhoto"/>
+                    <MediaElement x:Name="mediaElement"/>
 
                 </Grid>
                 <Grid x:Name="imageButtons"
