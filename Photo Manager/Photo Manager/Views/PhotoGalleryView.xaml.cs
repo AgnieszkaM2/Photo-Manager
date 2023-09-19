@@ -31,10 +31,14 @@ namespace Photo_Manager.Views
         public PhotoGalleryView()
         {
             InitializeComponent();
+            
         }
+        
+        public int indexer = 0;
 
         private void PhotoGalleryView_Loaded(object sender, RoutedEventArgs e)
         {
+            BaseResource.CurrentGallery.Clear();
             string imagesDir = BaseResource.ChosenPath;
             string[] filesindirectory = Directory.GetFiles(@imagesDir);
             foreach (var (s, newBtn, contextMenu) in from string s in filesindirectory
@@ -67,7 +71,10 @@ namespace Photo_Manager.Views
                 
                 newBtn.Tag = s;
 
+
                 PhotoGalleryStackPanel.Children.Add(newBtn);
+                BaseResource.CurrentGallery.Add(s);
+                indexer++;
             }
         }
         private void clipboard_onclick(object sender, RoutedEventArgs e)
@@ -84,7 +91,7 @@ namespace Photo_Manager.Views
         private void btnPhotoView(object sender, RoutedEventArgs e)
         {
             var selectedImgDir = ((Button)sender).Tag;
-            BaseResource.ChosenImage= (string)selectedImgDir;
+            BaseResource.ChosenImage= selectedImgDir.ToString();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

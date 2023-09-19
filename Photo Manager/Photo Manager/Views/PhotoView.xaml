@@ -32,6 +32,38 @@
                         </Style>
                     </Button.Resources>
                 </Button>
+                <Button x:Name="btnNextImage"
+                        Width="60"
+                        Height="50"
+                        FontSize="25"
+                        Content="⏭️"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="5,0,0,0"
+                        Click="btnNextImage_Click"
+                        Background="#CCFFFFFF">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="btnPreviousImage"
+                        Width="60"
+                        Height="50"
+                        FontSize="25"
+                        Content="⏮️"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Margin="5,0,0,0"
+                        Click="btnPreviousImage_Click"
+                        Background="#CCFFFFFF">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
                 <Grid x:Name="imageWindow"
                   Height="350"
                   Width="400"

@@ -11,6 +11,8 @@ namespace Photo_Manager.ViewModels
         public static string ChosenImage { get; set; }
         public static string ChosenPath { get; set; }
 
+        public static List<string> CurrentGallery = new List<string>();
+
 
     }
 }
