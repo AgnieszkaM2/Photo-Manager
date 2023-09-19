@@ -35,7 +35,7 @@
                 <Grid x:Name="imageWindow"
                   Height="350"
                   Width="400"
-                  VerticalAlignment="Top">
+                  VerticalAlignment="Top" MouseLeftButtonDown="imageWindow_MouseLeftButtonDown">
                     <Image x:Name="displayedPhoto"/>
 
                 </Grid>
