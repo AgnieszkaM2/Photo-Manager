@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic;
 using Newtonsoft.Json;
+using Photo_Manager.AdditionalResources;
 using Photo_Manager.Commands;
 using Photo_Manager.ViewModels;
 using System;
@@ -88,7 +89,7 @@ namespace Photo_Manager.Views
         private void btnGalleryView(object sender, RoutedEventArgs e)
         {
             var selectedDir = ((Button)sender).Tag;
-            BaseResource.ChosenPath= (string)selectedDir;
+            CurrentResources.ChosenPath= (string)selectedDir;
         }
 
     }

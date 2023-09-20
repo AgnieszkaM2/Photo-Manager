@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Photo_Manager.ViewModels
+namespace Photo_Manager.AdditionalResources
 {
-    public class BaseResource
+    public class CurrentResources
     {
         public static string ChosenImage { get; set; }
         public static string ChosenPath { get; set; }
 
         public static List<string> CurrentGallery = new List<string>();
-
 
     }
 }

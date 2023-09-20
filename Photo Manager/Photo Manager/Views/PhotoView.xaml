@@ -121,7 +121,105 @@
 
             </Grid>
         </Grid>
-        <local:SideMenuView Grid.Column="1"/>
+        <Grid x:Name="sideMenuGrid"
+              Grid.Column="1"
+              Width="200"
+              HorizontalAlignment="Right"
+              Background="#8000B4D8">
+            <Grid x:Name="sideMenuItems"
+                  Margin="10,20,10,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="btnAddTag"
+                    Height="45"
+                    Content="Dodaj tag"
+                    FontSize="20"
+                    Background="#CCFFFFFF"
+                    Click="btnAddTag_Click"
+                    Grid.Row="0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="btnDeleteTag"
+                    Height="45"
+                    Content="Usuń tag"
+                    FontSize="20"
+                    Background="#CCFFFFFF"
+                    Click="btnDeleteTag_Click"
+                    Grid.Row="1">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="btnEditTag"
+                    Height="45"
+                    Content="Edytuj tag"
+                    FontSize="20"
+                    Background="#CCFFFFFF"
+                    Click="btnEditTag_Click"
+                    Grid.Row="2">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Grid x:Name="addTagControl"
+                      Grid.Row="5">
+                    <StackPanel x:Name="addTagStackPanel"
+                                HorizontalAlignment="Center">
+                        <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,5">Dodaj tag</TextBlock>
+                        <MediaElement x:Name="addTagMediaElement" Width="150" Height="150" Margin="0,0,0,5"/>
+                        <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5">Wpisz tag:</TextBlock>
+                        <ComboBox x:Name="addTagComboBox" IsEditable="True" FontSize="16" Width="150" Margin="0,0,0,5"></ComboBox>
+
+                    </StackPanel>
+                    <Button x:Name="addTagSaveBtn" Width="80" Height="30" FontSize="18" VerticalAlignment="Bottom" Click="addTagSaveBtn_Click">Zapisz</Button>
+
+                </Grid>
+                <Grid x:Name="removeTagControl"
+                      Grid.Row="5">
+                    <StackPanel x:Name="removeTagStackPanel"
+                                HorizontalAlignment="Center">
+                        <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,5">Usuń tag</TextBlock>
+                        <MediaElement x:Name="removeTagMediaElement" Width="150" Height="150" Margin="0,0,0,5"/>
+                        <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5">Wybierz tag:</TextBlock>
+                        <ComboBox x:Name="removeTagComboBox" FontSize="16" Width="150" Margin="0,0,0,5"></ComboBox>
+
+                    </StackPanel>
+                    <Button x:Name="removeTagSaveBtn" Width="80" Height="30" FontSize="18" VerticalAlignment="Bottom" Click="removeTagSaveBtn_Click">Usuń</Button>
+
+                </Grid>
+                <Grid x:Name="editTagControl"
+                      Grid.Row="5">
+                    <StackPanel x:Name="editTagStackPanel"
+                                HorizontalAlignment="Center">
+                        <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,5">Edytuj tag</TextBlock>
+                        <MediaElement x:Name="editTagMediaElement" Width="150" Height="150" Margin="0,0,0,5"/>
+                        <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5">Wybierz tag:</TextBlock>
+                        <ComboBox x:Name="chooseEditTagComboBox" FontSize="16" Width="150" Margin="0,0,0,5"></ComboBox>
+                        <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5">Wpisz tag:</TextBlock>
+                        <ComboBox x:Name="editTagComboBox" IsEditable="True" FontSize="16" Width="150" Margin="0,0,0,5"></ComboBox>
+
+                    </StackPanel>
+                    <Button x:Name="editTagSaveBtn" Width="80" Height="30" FontSize="18" VerticalAlignment="Bottom" Click="editTagSaveBtn_Click">Zapisz</Button>
+
+                </Grid>
+
+            </Grid>
+
+        </Grid>
 
     </Grid>
 </UserControl>
