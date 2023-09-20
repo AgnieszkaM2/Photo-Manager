@@ -12,6 +12,9 @@ namespace Photo_Manager.AdditionalResources
         public static string ChosenPath { get; set; }
 
         public static List<string> CurrentGallery = new List<string>();
+        public static bool IsFilterSet { get; set; }
+        public static string FilterType { get; set; }
+        public static string Filtervalue { get; set;}
 
     }
 }

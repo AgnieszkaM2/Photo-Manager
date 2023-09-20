@@ -43,6 +43,8 @@ namespace Photo_Manager.Views
             addTagControl.Visibility = Visibility.Hidden;
             removeTagControl.Visibility = Visibility.Hidden;
             editTagControl.Visibility = Visibility.Hidden;
+            filtersPanel.Visibility = Visibility.Collapsed;
+            btnFiltersClear.Visibility = Visibility.Hidden;
         }
         
         ToggleButton _CurrentlyCheckedButton;
@@ -128,6 +130,88 @@ namespace Photo_Manager.Views
                 PhotoGalleryStackPanel.Children.Add(newBtn);
                 CurrentResources.CurrentGallery.Add(s);
 
+            }
+
+            if (CurrentResources.IsFilterSet == true)
+            {
+                btnFiltersClear.Visibility = Visibility.Visible;
+                if (CurrentResources.FilterType == "Tag")
+                {
+                    FilterByTag();
+                }
+                else if (CurrentResources.FilterType == "Typ pliku")
+                {
+                    FilterByFileType();
+                }
+            }
+
+        }
+
+        private void FilterByTag()
+        {
+            string filter = CurrentResources.Filtervalue;
+            if(string.IsNullOrEmpty(filter) == false) 
+            {
+                string _path = @".\tags.json";
+                if (!File.Exists(_path)) File.CreateText(_path).Close();
+
+                var jsonData = System.IO.File.ReadAllText(_path);
+                var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
+
+                var filteredPhotos = (from x in tagsList
+                                      where x.Name == filter
+                                      select x.PhotoPath)
+                                      .ToList();
+
+                foreach( ToggleButton photo in PhotoGalleryStackPanel.Children ) 
+                {
+                    if(filteredPhotos.Contains(photo.Tag))
+                    {
+                        photo.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        photo.Visibility=Visibility.Collapsed;
+                    }
+                }
+            }
+
+        }
+
+        private void ClearFilters()
+        {
+            foreach (ToggleButton photo in PhotoGalleryStackPanel.Children)
+            {
+                photo.Visibility = Visibility.Visible;
+            }
+
+            filtersPanel.Visibility = Visibility.Collapsed;
+            btnFilterPanel.Background = new SolidColorBrush(Color.FromArgb(0xCC, 0xFF, 0xFF, 0xFF));
+            btnFiltersClear.Visibility = Visibility.Hidden;
+            CurrentResources.IsFilterSet = false;
+            CurrentResources.FilterType = null;
+            CurrentResources.Filtervalue = null;
+
+        }
+
+        private void FilterByFileType()
+        {
+            string filter = CurrentResources.Filtervalue;
+            if (string.IsNullOrEmpty(filter) == false)
+            {
+                string regexPattern = @"([^\s]+(\.(?i)("+filter+"))$)";
+
+                foreach (ToggleButton photo in PhotoGalleryStackPanel.Children)
+                {
+                    if (Regex.IsMatch(photo.Tag.ToString(), regexPattern))
+                    {
+                        photo.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        photo.Visibility = Visibility.Collapsed;
+                    }
+                }
             }
         }
 
@@ -486,6 +570,85 @@ namespace Photo_Manager.Views
 
             editTagComboBox.Text = null;
             editTagControl.Visibility = Visibility.Hidden;
+        }
+
+        private void FiltersType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (filtersType.SelectedIndex == 0)
+            {
+                string _path = @".\tags.json";
+
+                if (!File.Exists(_path)) File.CreateText(_path).Close();
+
+
+                if (Directory.Exists(CurrentResources.ChosenPath))
+                {
+                    var jsonData = System.IO.File.ReadAllText(_path);
+                    var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
+
+                    var allTags = (from x in tagsList
+                                   select x.Name)
+                               .Distinct().ToList();
+
+                    if (allTags.Count > 0)
+                    {
+                        filterValues.ItemsSource = allTags;
+                    }
+
+
+                }
+                else
+                {
+                    var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                    errorview.ShowDialog();
+                }
+            }
+            else if (filtersType.SelectedIndex == 1)
+            {
+                string[] allFileTypes = { "jpg", "jpeg", "png", "mp4", "webm" };
+                filterValues.ItemsSource = allFileTypes;
+            }
+        }
+
+        private void btnFilterPanel_Click(object sender, RoutedEventArgs e)
+        {
+            if(filtersPanel.Visibility == Visibility.Visible) 
+            {
+                filtersPanel.Visibility = Visibility.Collapsed;
+                btnFilterPanel.Background = new SolidColorBrush(Color.FromArgb(0xCC, 0xFF, 0xFF, 0xFF));
+            }
+            else
+            {
+                filtersPanel.Visibility = Visibility.Visible;
+                btnFilterPanel.Background = new SolidColorBrush(Color.FromArgb(0x80, 0x00, 0xB4, 0xD8));
+            }
+            
+        }
+
+        private void btnFiltersClear_Click(object sender, RoutedEventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void btnFilter_Click(object sender, RoutedEventArgs e)
+        {
+            if(filtersType.SelectedIndex == 0 && filterValues.SelectedItem != null) 
+            {
+                CurrentResources.IsFilterSet = true;
+                CurrentResources.FilterType = "Tag";
+                CurrentResources.Filtervalue = filterValues.SelectedItem.ToString();
+                FilterByTag();
+                btnFiltersClear.Visibility = Visibility.Visible;
+            }
+            else if(filtersType.SelectedIndex == 1 && filterValues.SelectedItem != null)
+            {
+                CurrentResources.IsFilterSet = true;
+                CurrentResources.FilterType = "Typ pliku";
+                CurrentResources.Filtervalue = filterValues.SelectedItem.ToString();
+                FilterByFileType();
+                btnFiltersClear.Visibility = Visibility.Visible;
+            }
         }
     }
 }

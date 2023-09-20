@@ -21,20 +21,61 @@
         </Grid.ColumnDefinitions>
         <Grid x:Name="mainViewGridFrame"
               Margin="0,20,0,0">
-            <Button Width="250"
+            <Button x:Name="btnFilterPanel" 
+                 Width="250"
                  Height="45"
                  Content="Filtruj"
                  FontSize="22"
                  Background="#CCFFFFFF"
-                VerticalAlignment="Top">
+                VerticalAlignment="Top"
+                Click="btnFilterPanel_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
+            <Button x:Name="btnFiltersClear" 
+                    Width="150"
+                    Height="45"
+                    Content="Wyczyść filtry"
+                    FontSize="22"
+                    Background="#CCFFFFFF"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,10,0"
+                    Click="btnFiltersClear_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <StackPanel x:Name="filtersPanel" 
+                        Orientation="Horizontal"
+                        Height="50"
+                        VerticalAlignment="Top"
+                        Margin="0,60,10,20"
+                        Background="#8000B4D8">
+                <TextBlock FontSize="18" VerticalAlignment="Center" Margin="5,0,10,0">Wybierz typ filtru: </TextBlock>
+                <ComboBox x:Name="filtersType" Width="120" Height="35" FontSize="18" Margin="0,0,10,0" SelectionChanged="FiltersType_SelectionChanged">
+                    <ComboBoxItem>Tag</ComboBoxItem>
+                    <ComboBoxItem>Typ pliku</ComboBoxItem>
+                </ComboBox>
+                <TextBlock FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0">Wybierz filtr:</TextBlock>
+                <ComboBox x:Name="filterValues" Width="190" Height="35" FontSize="18" Margin="0,0,10,0">
+                </ComboBox>
+                <Button x:Name="btnFilter" Width="80" Height="35" FontSize="18" Background="#CCFFFFFF" Margin="10,0,10,0" Click="btnFilter_Click">
+                    Filtruj
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
             <Grid x:Name="mainViewGridItems"
-              Margin="10,90,5,10" Loaded="PhotoGalleryView_Loaded">
+              Margin="10,120,5,10" Loaded="PhotoGalleryView_Loaded">
                 <ScrollViewer>
                     <WrapPanel  x:Name="PhotoGalleryStackPanel" HorizontalAlignment="Center">
                     </WrapPanel>
