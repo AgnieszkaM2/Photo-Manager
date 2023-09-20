@@ -66,15 +66,18 @@ namespace Photo_Manager.Views
                                                              select (i, newBtn, _label, _stackPanel))
             {
                 _label.Content = i.dir.ToString()[(i.dir.ToString().LastIndexOf("\\")..)];
+                
                 newBtn.Content = new Image
                 {
-                    Width = 180,
-                    Height = 180,
-                   // Source = new BitmapImage(new Uri(@"D:\Desktop\Photo-Manager\Photo Manager\Photo Manager\Assets\icons8-photo-64.png")),
+                    Width = 100,
+                    Height = 100,
+                    Source = new BitmapImage(new Uri(@"../Assets/icons8-photo-64.png", UriKind.Relative)),
                     VerticalAlignment = VerticalAlignment.Center,
                 };
 
-                newBtn.Background = new SolidColorBrush(Colors.Transparent);
+                newBtn.Width = 115;
+                newBtn.Height = 190;
+                newBtn.Background = new SolidColorBrush(Color.FromArgb(0x66, 0x00, 0xB4, 0xD8));
                 newBtn.Margin = new Thickness(5);
                 newBtn.SetBinding(Button.CommandProperty, new Binding("NavigatePhotoGalleryViewCommand"));
                 newBtn.Click += new RoutedEventHandler(btnGalleryView);

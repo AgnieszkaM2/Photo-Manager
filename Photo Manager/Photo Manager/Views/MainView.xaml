@@ -8,10 +8,36 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid x:Name="mainViewGrid">
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" Background="#6600B4D8">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Focusable="True"></ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="10" Background="#4D00B4D8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Focusable="True"></ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
 
         <Grid x:Name="mainViewGridFrame"
               Margin="0,20,0,0">
-            
+
             <Button x:Name="btnGallery" 
                  Width="250"
                  Height="45"
@@ -19,43 +45,31 @@
                  FontSize="22"
                  Background="#CCFFFFFF"
                 VerticalAlignment="Top"
-                Click="btnGallery_Click"
-                >
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
+                Click="btnGallery_Click">
             </Button>
             <Grid x:Name="mainViewGridItems"
-              Margin="10,90,5,10" Loaded="mainViewGridItems_Loaded">
-                <ScrollViewer x:Name="savedDirectoriesListBox" 
-                 Background="Transparent" 
-                 Width="auto" 
-                 Height="auto" 
-                 VerticalAlignment="Top" 
-                 HorizontalAlignment="Left">
+                  Margin="10,90,5,10" Loaded="mainViewGridItems_Loaded">
+                <ScrollViewer x:Name="savedDirectoriesListBox">
+                    <WrapPanel x:Name="mainGalleryItemsPanel" HorizontalAlignment="Center">
+                        <WrapPanel  x:Name="MainGalleryStackPanel" HorizontalAlignment="Center">
 
+                        </WrapPanel>
+                        <Button x:Name="btnAddNewDirectory" 
+                                Background="#6600B4D8"
+                                Content="+"
+                                FontSize="70"
+                                Foreground="White"
+                                Width="115" 
+                                Height="200"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Left"
+                                Margin="15,0,10,0"
+                                Click="btnAddNewDirectory_Click"
+                                Command="{Binding NavigateAddDirectoryViewCommand}">
+                        </Button>
+                    </WrapPanel>
                 </ScrollViewer>
-                <Button x:Name="btnAddNewDirectory" 
-                Background="#6600B4D8"
-                Content="+"
-                FontSize="70"
-                Foreground="White"
-                Width="115" 
-                Height="189"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                Click="btnAddNewDirectory_Click"
-                Command="{Binding NavigateAddDirectoryViewCommand}">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="20"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <WrapPanel  x:Name="MainGalleryStackPanel" HorizontalAlignment="Center">
-                </WrapPanel>
+
             </Grid>
         </Grid>
         
