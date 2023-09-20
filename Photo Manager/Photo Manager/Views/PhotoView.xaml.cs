@@ -124,10 +124,6 @@ namespace Photo_Manager.Views
                     {
                         addTagComboBox.ItemsSource = allTags;
                     }
-                    else if (allTags.Count == 0)
-                    {
-                        addTagComboBox.Items.Add("None");
-                    }
 
                 }
                 else
@@ -215,13 +211,6 @@ namespace Photo_Manager.Views
                     {
                         editTagComboBox.ItemsSource = allTags;
                     }
-                    else if (allTags.Count == 0)
-                    {
-                        editTagComboBox.Items.Add("None");
-                    }
-
-
-
 
                 }
                 else
@@ -248,16 +237,9 @@ namespace Photo_Manager.Views
                 string newTag = null;
                 if (addTagComboBox.SelectedItem != null)
                 {
-                    if (addTagComboBox.SelectedItem.ToString() == "None" && addTagComboBox.Text != null)
-                    {
-                        newTag = addTagComboBox.Text;
-                    }
-                    else if (addTagComboBox.SelectedItem.ToString() != "None" && addTagComboBox.Text == null)
-                    {
-                        newTag = addTagComboBox.SelectedItem.ToString();
-                    }
+                    newTag = addTagComboBox.SelectedItem.ToString();
                 }
-                else if (addTagComboBox.Text != null)
+                else if (addTagComboBox.Text != null && addTagComboBox.SelectedItem == null)
                 {
                     newTag = addTagComboBox.Text;
                 }
@@ -317,10 +299,7 @@ namespace Photo_Manager.Views
                 string tagToRemove = null;
                 if (removeTagComboBox.SelectedItem != null)
                 {
-                    if (removeTagComboBox.SelectedItem.ToString() != "None")
-                    {
-                        tagToRemove = removeTagComboBox.SelectedItem.ToString();
-                    }
+                    tagToRemove = removeTagComboBox.SelectedItem.ToString();
                 }
 
                 if (string.IsNullOrEmpty(tagToRemove) == false)
@@ -363,23 +342,15 @@ namespace Photo_Manager.Views
                 string newTag = null;
                 if (chooseEditTagComboBox.SelectedItem != null)
                 {
-                    if (chooseEditTagComboBox.SelectedItem.ToString() != "None")
-                    {
-                        oldTag = chooseEditTagComboBox.SelectedItem.ToString();
-                    }
+                    oldTag = chooseEditTagComboBox.SelectedItem.ToString();
                 }
+
+
                 if (editTagComboBox.SelectedItem != null)
                 {
-                    if (editTagComboBox.SelectedItem.ToString() == "None" && editTagComboBox.Text != null)
-                    {
-                        newTag = editTagComboBox.Text;
-                    }
-                    else if (editTagComboBox.SelectedItem.ToString() != "None" && editTagComboBox.Text == null)
-                    {
-                        newTag = editTagComboBox.SelectedItem.ToString();
-                    }
+                    newTag = editTagComboBox.SelectedItem.ToString();
                 }
-                else if (editTagComboBox.Text != null)
+                else if (editTagComboBox.Text != null && editTagComboBox.SelectedItem == null)
                 {
                     newTag = editTagComboBox.Text;
                 }
