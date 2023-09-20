@@ -21,9 +21,6 @@
         <DataTemplate DataType="{x:Type viewmodels:PhotoViewModel}">
             <views:PhotoView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:SideMenuViewModel}">
-            <views:SideMenuView/>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:ErrorViewModel}">
             <views:ErrorView/>
         </DataTemplate>
