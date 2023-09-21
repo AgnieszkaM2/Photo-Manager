@@ -63,5 +63,17 @@ namespace Photo_Manager
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
         }
+
+        public void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.BorderThickness = new System.Windows.Thickness(10,10,10,40);
+            }
+            else
+            {
+                this.BorderThickness = new System.Windows.Thickness(0);
+            }
+        }
     }
 }

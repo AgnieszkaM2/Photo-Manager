@@ -6,10 +6,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Photo_Manager.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Loaded="PhotoView_Loaded" Unloaded="PhotoView_Unloaded">
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="PhotoView_Loaded" Unloaded="PhotoView_Unloaded" SizeChanged="photView_SizeChanged">
     <Grid x:Name="mainViewGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="15"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid x:Name="mainViewGridFrame"
@@ -39,7 +40,7 @@
                         Content="⏭️"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right"
-                        Margin="5,0,0,0"
+                        Margin="0,0,0,5"
                         Click="btnNextImage_Click"
                         Background="#CCFFFFFF">
                     <Button.Resources>
@@ -65,10 +66,13 @@
                     </Button.Resources>
                 </Button>
                 <Grid x:Name="imageWindow"
-                  Height="350"
-                  Width="400"
-                  VerticalAlignment="Top" MouseLeftButtonDown="imageWindow_MouseLeftButtonDown">
-                    <MediaElement x:Name="mediaElement"/>
+                      VerticalAlignment="Top" 
+                      HorizontalAlignment="Center" 
+                      Width="500" 
+                      Height="425" 
+                      Background="#8000B4D8"
+                      MouseLeftButtonDown="imageWindow_MouseLeftButtonDown">
+                    <MediaElement Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="mediaElement"/>
 
                 </Grid>
                 <Grid x:Name="imageButtons"
@@ -121,8 +125,13 @@
 
             </Grid>
         </Grid>
+        <Button x:Name="btnSideMenu" 
+                Grid.Column="1"
+                Content="|||"
+                Background="AliceBlue"
+                Click="btnSideMenu_Click"></Button>
         <Grid x:Name="sideMenuGrid"
-              Grid.Column="1"
+              Grid.Column="2"
               Width="200"
               HorizontalAlignment="Right"
               Background="#8000B4D8">
@@ -182,7 +191,7 @@
                         <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,5">Dodaj tag</TextBlock>
                         <MediaElement x:Name="addTagMediaElement" Width="150" Height="150" Margin="0,0,0,5"/>
                         <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5">Wpisz tag:</TextBlock>
-                        <ComboBox x:Name="addTagComboBox" IsEditable="True" FontSize="16" Width="150" Margin="0,0,0,5"></ComboBox>
+                        <ComboBox x:Name="addTagComboBox" IsEditable="True" FontSize="16" Width="150" Margin="0,0,0,5" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="150"></ComboBox>
 
                     </StackPanel>
                     <Button x:Name="addTagSaveBtn" Width="80" Height="30" FontSize="18" VerticalAlignment="Bottom" Click="addTagSaveBtn_Click">Zapisz</Button>
@@ -195,7 +204,7 @@
                         <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,5">Usuń tag</TextBlock>
                         <MediaElement x:Name="removeTagMediaElement" Width="150" Height="150" Margin="0,0,0,5"/>
                         <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5">Wybierz tag:</TextBlock>
-                        <ComboBox x:Name="removeTagComboBox" FontSize="16" Width="150" Margin="0,0,0,5"></ComboBox>
+                        <ComboBox x:Name="removeTagComboBox" FontSize="16" Width="150" Margin="0,0,0,5" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="150"></ComboBox>
 
                     </StackPanel>
                     <Button x:Name="removeTagSaveBtn" Width="80" Height="30" FontSize="18" VerticalAlignment="Bottom" Click="removeTagSaveBtn_Click">Usuń</Button>
@@ -208,9 +217,9 @@
                         <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,5">Edytuj tag</TextBlock>
                         <MediaElement x:Name="editTagMediaElement" Width="150" Height="150" Margin="0,0,0,5"/>
                         <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5">Wybierz tag:</TextBlock>
-                        <ComboBox x:Name="chooseEditTagComboBox" FontSize="16" Width="150" Margin="0,0,0,5"></ComboBox>
+                        <ComboBox x:Name="chooseEditTagComboBox" FontSize="16" Width="150" Margin="0,0,0,5" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="150"></ComboBox>
                         <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5">Wpisz tag:</TextBlock>
-                        <ComboBox x:Name="editTagComboBox" IsEditable="True" FontSize="16" Width="150" Margin="0,0,0,5"></ComboBox>
+                        <ComboBox x:Name="editTagComboBox" IsEditable="True" FontSize="16" Width="150" Margin="0,0,0,5" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="150"></ComboBox>
 
                     </StackPanel>
                     <Button x:Name="editTagSaveBtn" Width="80" Height="30" FontSize="18" VerticalAlignment="Bottom" Click="editTagSaveBtn_Click">Zapisz</Button>

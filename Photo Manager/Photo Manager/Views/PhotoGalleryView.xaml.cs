@@ -650,5 +650,17 @@ namespace Photo_Manager.Views
                 btnFiltersClear.Visibility = Visibility.Visible;
             }
         }
+
+        private void btnSideMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (sideMenuGrid.Visibility == Visibility.Visible)
+            {
+                sideMenuGrid.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                sideMenuGrid.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

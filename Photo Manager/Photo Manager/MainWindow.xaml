@@ -12,7 +12,8 @@
         WindowStyle="None"
         MouseDown="Window_MouseDown"
         Background="#CAF0F8"
-        Loaded= "MainWindow_Loaded">
+        Loaded= "MainWindow_Loaded"
+        SizeChanged="Window_SizeChanged">
 
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>

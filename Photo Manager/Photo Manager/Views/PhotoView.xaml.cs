@@ -401,5 +401,25 @@ namespace Photo_Manager.Views
             editTagControl.Visibility = Visibility.Hidden;
         }
 
+        private void btnSideMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if(sideMenuGrid.Visibility == Visibility.Visible) 
+            {
+                sideMenuGrid.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                sideMenuGrid.Visibility= Visibility.Visible;
+            }
+        }
+
+        private void photView_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
+            {
+                imageWindow.Width = 900;
+                imageWindow.Height = 650;
+            }
+        }
     }
 }
