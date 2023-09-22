@@ -1,4 +1,5 @@
-﻿using Photo_Manager.Commands;
+﻿using Photo_Manager.AdditionalResources;
+using Photo_Manager.Commands;
 using Photo_Manager.ViewModels;
 using Photo_Manager.Views;
 using System;
@@ -73,6 +74,20 @@ namespace Photo_Manager
             else
             {
                 this.BorderThickness = new System.Windows.Thickness(0);
+            }
+        }
+
+        private void btnAppTheme_Click(object sender, RoutedEventArgs e)
+        {
+            if(CurrentResources.CurrentTheme == "Light")
+            {
+                AppTheme.ChangeTheme(new Uri("Assets/DarkTheme.xaml", UriKind.Relative));
+                CurrentResources.CurrentTheme = "Dark";
+            }
+            else if(CurrentResources.CurrentTheme == "Dark")
+            {
+                AppTheme.ChangeTheme(new Uri("Assets/LightTheme.xaml", UriKind.Relative));
+                CurrentResources.CurrentTheme = "Light";
             }
         }
     }

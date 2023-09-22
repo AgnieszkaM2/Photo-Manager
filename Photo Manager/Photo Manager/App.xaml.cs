@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Photo_Manager.AdditionalResources;
 using Photo_Manager.Services;
 using Photo_Manager.ViewModels;
 using System;
@@ -40,6 +41,7 @@ namespace Photo_Manager
         {
             var mainWindow = _serviceProvider.GetService<MainWindow>();
             mainWindow.Show();
+            SystemThemeSettings.CheckTheme();
             base.OnStartup(e);
         }
     }

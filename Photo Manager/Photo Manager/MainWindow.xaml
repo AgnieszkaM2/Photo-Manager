@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         MouseDown="Window_MouseDown"
-        Background="#CAF0F8"
+        Background="{DynamicResource AppBackground}"
         Loaded= "MainWindow_Loaded"
         SizeChanged="Window_SizeChanged">
 
@@ -24,7 +24,7 @@
             <RowDefinition Height ="50" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid x:Name="mainAppBar" Background="#9900B4D8">
+        <Grid x:Name="mainAppBar" Background="{DynamicResource MainAppBar}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="65" />
                 <ColumnDefinition Width="350" />
@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="45" />
             </Grid.ColumnDefinitions>
             <Button x:Name="btnAppLogo"
-                    Background="#CCFFFFFF"
+                    Background="{DynamicResource ButtonsBackground}"
                     Grid.Column="0"
                     Command="{Binding NavigateMainViewCommand}"
                     Click="btnAppLogo_Click">
@@ -50,10 +50,27 @@
                     Height="45"
                     Content="Dodaj folder"
                     FontSize="20"
-                    Background="#CCFFFFFF"
+                    Background="{DynamicResource ButtonsBackground}"
                     Grid.Column="1"
                     Click="btnAddDirectory_Click"
                     Command="{Binding NavigateAddDirectoryViewCommand}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="btnAppTheme"
+                    Background="{DynamicResource ThemeButton}"
+                    Grid.Column="2"
+                    Click="btnAppTheme_Click"
+                    Content="☾☼"
+                    Width="50"
+                    Height="45"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,20,0"
+                    FontSize="25"
+                    Foreground="{DynamicResource ThemeText}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -66,7 +83,7 @@
                     Content="-"
                     FontSize="30"
                     FontWeight="Bold"
-                    Background="#CCFFFFFF"
+                    Background="{DynamicResource ButtonsBackground}"
                     Grid.Column="3"
                     Click="btnMinimize_Click">
                 <Button.Resources>
@@ -80,7 +97,7 @@
                     Content="🗖"
                     VerticalContentAlignment="Top"
                     FontSize="28"
-                    Background="#CCFFFFFF"
+                    Background="{DynamicResource ButtonsBackground}"
                     Grid.Column="4"
                     Click="btnMaximize_Click">
                 <Button.Resources>
@@ -94,7 +111,7 @@
                     Content="x"
                     VerticalContentAlignment="Top"
                     FontSize="28"
-                    Background="#CCFFFFFF"
+                    Background="{DynamicResource ButtonsBackground}"
                     Grid.Column="5"
                     Click="btnClose_Click">
                 <Button.Resources>

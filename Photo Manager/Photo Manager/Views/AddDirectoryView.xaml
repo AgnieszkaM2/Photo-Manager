@@ -8,11 +8,12 @@
              d:DesignHeight="450" d:DesignWidth="800" Loaded="AddDirectory_Loaded">
     <Grid x:Name="mainViewGrid">
         <Grid x:Name="formGrid"
-              Background="#8000B4D8">
+              Background="{DynamicResource SideMenuBackground}">
             <StackPanel Width="500"
                         Height="350">
                 <TextBlock HorizontalAlignment="Center"
                            FontSize="20"
+                           Foreground="{DynamicResource TextContrast}"
                            Margin="5,25,5,10">Wpisz nazwę pod ktorą chcesz zapisać nową ścieżkę:</TextBlock>
                 <TextBox x:Name="newDirectoryName"
                          HorizontalAlignment="Center"
@@ -22,6 +23,7 @@
                          Margin="5,20,5,10"></TextBox>
                 <TextBlock HorizontalAlignment="Center"
                            FontSize="20"
+                           Foreground="{DynamicResource TextContrast}"
                            Margin="5,25,5,25">Wybierz nową ścieżkę do zapisania:</TextBlock>
 
                 <Button x:Name="btnChooseDirectory"
@@ -29,7 +31,7 @@
                      Height="60"
                      Content="Wybierz ścieżkę"
                      FontSize="20"
-                     Background="#CCFFFFFF" Click="btnChooseDirectory_Click">
+                     Background="{DynamicResource ButtonsBackground}" Click="btnChooseDirectory_Click">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -42,7 +44,7 @@
                         Height="50"
                         Content="Zapisz"
                         FontSize="20"
-                        Background="#CCFFFFFF"
+                        Background="{DynamicResource ButtonsBackground}"
                         Margin="0,35,0,0"
                         HorizontalAlignment="Right" 
                         Click="btnSave_Click"
@@ -58,7 +60,7 @@
                         Height="50"
                         Content="Wróć"
                         FontSize="20"
-                        Background="#CCFFFFFF"
+                        Background="{DynamicResource ButtonsBackground}"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
                         Click="btnCancel_Click"

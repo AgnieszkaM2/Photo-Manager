@@ -9,29 +9,18 @@
 
     <Grid x:Name="mainViewGrid">
         <Grid.Resources>
-            <Style TargetType="Button">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="10" Background="#6600B4D8">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Focusable="True"></ContentPresenter>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border CornerRadius="10" Background="#4D00B4D8">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Focusable="True"></ContentPresenter>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Trigger>
-                </Style.Triggers>
+            <Style TargetType="ScrollBar">
+                <Setter Property="Background" Value="{DynamicResource PanelItemsBackground}"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+            </Style>
+            <Style TargetType="RepeatButton">
+                <Setter Property="Background" Value="{DynamicResource SideMenuBackground}"/>
+            </Style>
+            <Style TargetType="Track">
+                <Setter Property="Opacity" Value="0.4"/>
+            </Style>
+            <Style TargetType="Thumb">
+                <Setter Property="Background" Value="{DynamicResource SideMenuBackground}"/>
             </Style>
         </Grid.Resources>
 
@@ -43,7 +32,8 @@
                  Height="45"
                  Content="Galerie zdjęć"
                  FontSize="22"
-                 Background="#CCFFFFFF"
+                 Background="{DynamicResource ButtonsBackground}"
+                 Style="{DynamicResource MainPanelItems}"
                 VerticalAlignment="Top"
                 Click="btnGallery_Click">
             </Button>
@@ -55,7 +45,8 @@
 
                         </WrapPanel>
                         <Button x:Name="btnAddNewDirectory" 
-                                Background="#6600B4D8"
+                                Background="{DynamicResource PanelItemsBackground}"
+                                Style="{DynamicResource MainPanelItems}"
                                 Content="+"
                                 FontSize="70"
                                 Foreground="White"

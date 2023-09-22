@@ -66,6 +66,7 @@ namespace Photo_Manager.Views
                                                              select (i, newBtn, _label, _stackPanel))
             {
                 _label.Content = i.dir.ToString()[(i.dir.ToString().LastIndexOf("\\")..)];
+                _label.SetResourceReference(Control.ForegroundProperty, "TextContrast");
                 
                 newBtn.Content = new Image
                 {
@@ -79,6 +80,7 @@ namespace Photo_Manager.Views
                 newBtn.Height = 190;
                 newBtn.Background = new SolidColorBrush(Color.FromArgb(0x66, 0x00, 0xB4, 0xD8));
                 newBtn.Margin = new Thickness(5);
+                newBtn.SetResourceReference(Control.StyleProperty, "MainPanelItems");
                 newBtn.SetBinding(Button.CommandProperty, new Binding("NavigatePhotoGalleryViewCommand"));
                 newBtn.Click += new RoutedEventHandler(btnGalleryView);
                 newBtn.Tag = i.dir;

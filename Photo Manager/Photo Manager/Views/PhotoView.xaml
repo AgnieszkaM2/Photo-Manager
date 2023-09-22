@@ -26,7 +26,7 @@
                         Margin="5,0,0,0"
                         Click="btnReturnToGallery_Click"
                         Command="{Binding NavigatePhotoGalleryViewCommand}"
-                        Background="#CCFFFFFF">
+                        Background="{DynamicResource ButtonsBackground}">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -42,7 +42,7 @@
                         HorizontalAlignment="Right"
                         Margin="0,0,0,5"
                         Click="btnNextImage_Click"
-                        Background="#CCFFFFFF">
+                        Background="{DynamicResource ButtonsBackground}">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -58,7 +58,7 @@
                         HorizontalAlignment="Left"
                         Margin="5,0,0,0"
                         Click="btnPreviousImage_Click"
-                        Background="#CCFFFFFF">
+                        Background="{DynamicResource ButtonsBackground}">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -70,7 +70,7 @@
                       HorizontalAlignment="Center" 
                       Width="500" 
                       Height="425" 
-                      Background="#8000B4D8"
+                      Background="{DynamicResource SideMenuBackground}"
                       MouseLeftButtonDown="imageWindow_MouseLeftButtonDown">
                     <MediaElement Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="mediaElement"/>
 
@@ -89,7 +89,7 @@
                      Height="45"
                      Content="-"
                      FontSize="22"
-                     Background="#CCFFFFFF"
+                     Background="{DynamicResource ButtonsBackground}"
                      Grid.Column="0">
                         <Button.Resources>
                             <Style TargetType="Border">
@@ -101,7 +101,7 @@
                      Height="45"
                      Content="-"
                      FontSize="22"
-                     Background="#CCFFFFFF"
+                     Background="{DynamicResource ButtonsBackground}"
                      Grid.Column="1">
                         <Button.Resources>
                             <Style TargetType="Border">
@@ -113,7 +113,7 @@
                      Height="45"
                      Content="-"
                      FontSize="22"
-                     Background="#CCFFFFFF"
+                     Background="{DynamicResource ButtonsBackground}"
                      Grid.Column="3">
                         <Button.Resources>
                             <Style TargetType="Border">
@@ -128,13 +128,14 @@
         <Button x:Name="btnSideMenu" 
                 Grid.Column="1"
                 Content="|||"
-                Background="AliceBlue"
+                Background="{DynamicResource SideMenuButton}"
+                BorderThickness="0"
                 Click="btnSideMenu_Click"></Button>
         <Grid x:Name="sideMenuGrid"
               Grid.Column="2"
               Width="200"
               HorizontalAlignment="Right"
-              Background="#8000B4D8">
+              Background="{DynamicResource SideMenuBackground}">
             <Grid x:Name="sideMenuItems"
                   Margin="10,20,10,20">
                 <Grid.RowDefinitions>
@@ -149,7 +150,7 @@
                     Height="45"
                     Content="Dodaj tag"
                     FontSize="20"
-                    Background="#CCFFFFFF"
+                    Background="{DynamicResource ButtonsBackground}"
                     Click="btnAddTag_Click"
                     Grid.Row="0">
                     <Button.Resources>
@@ -162,7 +163,7 @@
                     Height="45"
                     Content="Usuń tag"
                     FontSize="20"
-                    Background="#CCFFFFFF"
+                    Background="{DynamicResource ButtonsBackground}"
                     Click="btnDeleteTag_Click"
                     Grid.Row="1">
                     <Button.Resources>
@@ -175,7 +176,7 @@
                     Height="45"
                     Content="Edytuj tag"
                     FontSize="20"
-                    Background="#CCFFFFFF"
+                    Background="{DynamicResource ButtonsBackground}"
                     Click="btnEditTag_Click"
                     Grid.Row="2">
                     <Button.Resources>
@@ -188,41 +189,41 @@
                       Grid.Row="5">
                     <StackPanel x:Name="addTagStackPanel"
                                 HorizontalAlignment="Center">
-                        <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,5">Dodaj tag</TextBlock>
+                        <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,5" Foreground="{DynamicResource TextContrast}">Dodaj tag</TextBlock>
                         <MediaElement x:Name="addTagMediaElement" Width="150" Height="150" Margin="0,0,0,5"/>
-                        <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5">Wpisz tag:</TextBlock>
+                        <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5" Foreground="{DynamicResource TextContrast}">Wpisz tag:</TextBlock>
                         <ComboBox x:Name="addTagComboBox" IsEditable="True" FontSize="16" Width="150" Margin="0,0,0,5" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="150"></ComboBox>
 
                     </StackPanel>
-                    <Button x:Name="addTagSaveBtn" Width="80" Height="30" FontSize="18" VerticalAlignment="Bottom" Click="addTagSaveBtn_Click">Zapisz</Button>
+                    <Button x:Name="addTagSaveBtn" Background="{DynamicResource ButtonsBackground}" Width="80" Height="30" FontSize="18" VerticalAlignment="Bottom" Click="addTagSaveBtn_Click">Zapisz</Button>
 
                 </Grid>
                 <Grid x:Name="removeTagControl"
                       Grid.Row="5">
                     <StackPanel x:Name="removeTagStackPanel"
                                 HorizontalAlignment="Center">
-                        <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,5">Usuń tag</TextBlock>
+                        <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,5" Foreground="{DynamicResource TextContrast}">Usuń tag</TextBlock>
                         <MediaElement x:Name="removeTagMediaElement" Width="150" Height="150" Margin="0,0,0,5"/>
-                        <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5">Wybierz tag:</TextBlock>
+                        <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5" Foreground="{DynamicResource TextContrast}">Wybierz tag:</TextBlock>
                         <ComboBox x:Name="removeTagComboBox" FontSize="16" Width="150" Margin="0,0,0,5" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="150"></ComboBox>
 
                     </StackPanel>
-                    <Button x:Name="removeTagSaveBtn" Width="80" Height="30" FontSize="18" VerticalAlignment="Bottom" Click="removeTagSaveBtn_Click">Usuń</Button>
+                    <Button x:Name="removeTagSaveBtn" Background="{DynamicResource ButtonsBackground}" Width="80" Height="30" FontSize="18" VerticalAlignment="Bottom" Click="removeTagSaveBtn_Click">Usuń</Button>
 
                 </Grid>
                 <Grid x:Name="editTagControl"
                       Grid.Row="5">
                     <StackPanel x:Name="editTagStackPanel"
                                 HorizontalAlignment="Center">
-                        <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,5">Edytuj tag</TextBlock>
+                        <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,5" Foreground="{DynamicResource TextContrast}">Edytuj tag</TextBlock>
                         <MediaElement x:Name="editTagMediaElement" Width="150" Height="150" Margin="0,0,0,5"/>
-                        <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5">Wybierz tag:</TextBlock>
+                        <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5" Foreground="{DynamicResource TextContrast}">Wybierz tag:</TextBlock>
                         <ComboBox x:Name="chooseEditTagComboBox" FontSize="16" Width="150" Margin="0,0,0,5" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="150"></ComboBox>
-                        <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5">Wpisz tag:</TextBlock>
+                        <TextBlock FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,5" Foreground="{DynamicResource TextContrast}">Wpisz tag:</TextBlock>
                         <ComboBox x:Name="editTagComboBox" IsEditable="True" FontSize="16" Width="150" Margin="0,0,0,5" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="150"></ComboBox>
 
                     </StackPanel>
-                    <Button x:Name="editTagSaveBtn" Width="80" Height="30" FontSize="18" VerticalAlignment="Bottom" Click="editTagSaveBtn_Click">Zapisz</Button>
+                    <Button x:Name="editTagSaveBtn" Background="{DynamicResource ButtonsBackground}" Width="80" Height="30" FontSize="18" VerticalAlignment="Bottom" Click="editTagSaveBtn_Click">Zapisz</Button>
 
                 </Grid>
 

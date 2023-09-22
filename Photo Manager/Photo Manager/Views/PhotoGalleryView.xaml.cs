@@ -117,7 +117,7 @@ namespace Photo_Manager.Views
                     };
 
                 }
-                newBtn.Background = new SolidColorBrush(Colors.Transparent);
+                newBtn.SetResourceReference(Control.BackgroundProperty, "PhotoGalleryItems");
                 newBtn.Margin = new Thickness(5);
                 newBtn.Checked += ToggleBtn_Checked;
                 newBtn.Unchecked += ToggleBtn_Unchecked;
@@ -186,7 +186,7 @@ namespace Photo_Manager.Views
             }
 
             filtersPanel.Visibility = Visibility.Collapsed;
-            btnFilterPanel.Background = new SolidColorBrush(Color.FromArgb(0xCC, 0xFF, 0xFF, 0xFF));
+            btnFilterPanel.SetResourceReference(Control.BackgroundProperty, "ButtonsBackground");
             btnFiltersClear.Visibility = Visibility.Hidden;
             CurrentResources.IsFilterSet = false;
             CurrentResources.FilterType = null;
@@ -616,12 +616,14 @@ namespace Photo_Manager.Views
             if(filtersPanel.Visibility == Visibility.Visible) 
             {
                 filtersPanel.Visibility = Visibility.Collapsed;
-                btnFilterPanel.Background = new SolidColorBrush(Color.FromArgb(0xCC, 0xFF, 0xFF, 0xFF));
+                btnFilterPanel.SetResourceReference(Control.BackgroundProperty, "ButtonsBackground");
+                btnFilterPanel.Foreground = new SolidColorBrush(Colors.Black);
             }
             else
             {
                 filtersPanel.Visibility = Visibility.Visible;
-                btnFilterPanel.Background = new SolidColorBrush(Color.FromArgb(0x80, 0x00, 0xB4, 0xD8));
+                btnFilterPanel.SetResourceReference(Control.BackgroundProperty, "FiltersBarBackground");
+                btnFilterPanel.Foreground = new SolidColorBrush(Colors.White);
             }
             
         }
