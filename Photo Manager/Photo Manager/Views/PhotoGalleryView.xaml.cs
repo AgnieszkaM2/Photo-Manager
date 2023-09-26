@@ -197,6 +197,7 @@ namespace Photo_Manager.Views
 
             filtersPanel.Visibility = Visibility.Collapsed;
             btnFilterPanel.SetResourceReference(Control.BackgroundProperty, "ButtonsBackground");
+            btnFilterPanel.Foreground = new SolidColorBrush(Colors.Black);
             btnFiltersClear.Visibility = Visibility.Hidden;
             CurrentResources.IsFilterSet = false;
             CurrentResources.FilterType = null;
@@ -227,29 +228,31 @@ namespace Photo_Manager.Views
 
         private void ToggleBtn_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (_CurrentlyCheckedButton == ((ToggleButton)sender))
-            {
-                _CurrentlyCheckedButton = null;
-                CurrentResources.ChosenImage = null;
-                addTagControl.Visibility = Visibility.Hidden;
-                removeTagControl.Visibility = Visibility.Hidden;
-                editTagControl.Visibility = Visibility.Hidden;
-
-                //((ToggleButton)sender).BorderBrush = Brushes.Black;
-            }
+            _CurrentlyCheckedButton = null;
+            CurrentResources.ChosenImage = null;
+            addTagControl.Visibility = Visibility.Hidden;
+            removeTagControl.Visibility = Visibility.Hidden;
+            editTagControl.Visibility = Visibility.Hidden;
                 
         }
 
         private void ToggleBtn_Checked(object sender, RoutedEventArgs e)
         {
+            
             if (_CurrentlyCheckedButton != null)
-                ((ToggleButton)sender).IsChecked = false;
+            {
+                var previouslySelectedBtn = from x in PhotoGalleryStackPanel.Children.OfType<ToggleButton>() where x == _CurrentlyCheckedButton select x;
+                previouslySelectedBtn.ElementAt(0).IsChecked = false;
+                ((ToggleButton)sender).IsChecked = true;
+                _CurrentlyCheckedButton = ((ToggleButton)sender);
+                var selectedImgDir = ((ToggleButton)sender).Tag;
+                CurrentResources.ChosenImage = selectedImgDir.ToString();
+            }
             else
             {
                 _CurrentlyCheckedButton = ((ToggleButton)sender);
                 var selectedImgDir = ((ToggleButton)sender).Tag;
                 CurrentResources.ChosenImage = selectedImgDir.ToString();
-                //((ToggleButton)sender).BorderBrush = Brushes.White;
             }
             
         }
@@ -438,6 +441,15 @@ namespace Photo_Manager.Views
 
                     jsonData = JsonConvert.SerializeObject(tagsList);
                     System.IO.File.WriteAllText(_path, jsonData);
+                    if (CurrentResources.IsFilterSet == true && CurrentResources.FilterType == "Tag")
+                    {
+                        ClearFilters();
+                        filtersPanel.Visibility = Visibility.Visible;
+                        btnFilterPanel.SetResourceReference(Control.BackgroundProperty, "FiltersBarBackground");
+                        btnFilterPanel.Foreground = new SolidColorBrush(Colors.White);
+                        filtersType.SelectedIndex = -1;
+                        filterValues.SelectedIndex = -1;
+                    }
                 }
                 else
                 {
@@ -490,6 +502,15 @@ namespace Photo_Manager.Views
 
                     jsonData = JsonConvert.SerializeObject(tagsList);
                     System.IO.File.WriteAllText(_path, jsonData);
+                    if (CurrentResources.IsFilterSet == true && CurrentResources.FilterType == "Tag")
+                    {
+                        ClearFilters();
+                        filtersPanel.Visibility = Visibility.Visible;
+                        btnFilterPanel.SetResourceReference(Control.BackgroundProperty, "FiltersBarBackground");
+                        btnFilterPanel.Foreground = new SolidColorBrush(Colors.White);
+                        filtersType.SelectedIndex = -1;
+                        filterValues.SelectedIndex = -1;
+                    }
                 }
                 else
                 {
@@ -550,6 +571,15 @@ namespace Photo_Manager.Views
 
                     jsonData = JsonConvert.SerializeObject(tagsList);
                     System.IO.File.WriteAllText(_path, jsonData);
+                    if(CurrentResources.IsFilterSet == true && CurrentResources.FilterType=="Tag")
+                    {
+                        ClearFilters();
+                        filtersPanel.Visibility = Visibility.Visible;
+                        btnFilterPanel.SetResourceReference(Control.BackgroundProperty, "FiltersBarBackground");
+                        btnFilterPanel.Foreground = new SolidColorBrush(Colors.White);
+                        filtersType.SelectedIndex = -1;
+                        filterValues.SelectedIndex = -1;
+                    }
                 }
                 else
                 {
@@ -584,6 +614,7 @@ namespace Photo_Manager.Views
 
         private void FiltersType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            string[] emptyItemsSource= {""};
 
             if (filtersType.SelectedIndex == 0)
             {
@@ -604,6 +635,10 @@ namespace Photo_Manager.Views
                     if (allTags.Count > 0)
                     {
                         filterValues.ItemsSource = allTags;
+                    }
+                    else
+                    {
+                        filterValues.ItemsSource = emptyItemsSource;
                     }
 
 
