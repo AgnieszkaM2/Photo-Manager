@@ -70,9 +70,19 @@ namespace Photo_Manager.Views
                 menuItemDisplay.Click += new RoutedEventHandler(btnPhotoView);
                 menuItemDisplay.Tag = s;
                 menuItemDisplay.SetBinding(Button.CommandProperty, new Binding("NavigatePhotoViewCommand"));
+                MenuItem menuItemAddtofavorites = new MenuItem();
+                menuItemAddtofavorites.Header = "Dodaj do ulubionych";
+                menuItemAddtofavorites.Click += new RoutedEventHandler(btnmenu_ADD_favorites);
+                menuItemAddtofavorites.Tag = s;
+                MenuItem menuItemDeltofavorites = new MenuItem();
+                menuItemDeltofavorites.Header = "Unuń do ulubionych";
+                menuItemDeltofavorites.Click += new RoutedEventHandler(btnmenu_DEL_favorites);
+                menuItemDeltofavorites.Tag = s;
 
                 contextMenu.Items.Add(menuItemDisplay);
                 contextMenu.Items.Add(menuItemClipboard);
+                contextMenu.Items.Add(menuItemAddtofavorites);
+                contextMenu.Items.Add(menuItemDeltofavorites);
 
                 if (Regex.IsMatch(s, @"\.jpg|\.png|\.jpeg"))
                 {
@@ -664,5 +674,51 @@ namespace Photo_Manager.Views
                 sideMenuGrid.Visibility = Visibility.Visible;
             }
         }
+
+        private void btnmenu_ADD_favorites(object sender, RoutedEventArgs e)
+        {
+            string bufftag = string.Empty;
+
+            if (addTagComboBox.SelectedItem != null)
+            {
+                bufftag = addTagComboBox.SelectedItem.ToString();
+            }
+            addTagComboBox.Text = "Ulubione";
+            addTagSaveBtn_Click((MenuItem)sender, e);
+
+            addTagComboBox.Text = bufftag;
+
+        }
+
+        private void btnmenu_DEL_favorites(object sender, RoutedEventArgs e)
+        {
+            string bufftag = string.Empty;
+
+            var a = removeTagComboBox;
+
+            if (removeTagComboBox.SelectedItem != null)
+            {
+                bufftag = removeTagComboBox.SelectedItem.ToString();
+                
+            }
+            if (removeTagComboBox.ItemsSource == null)
+            {
+                removeTagComboBox.Items.Add("Ulubione");
+            }
+            
+            removeTagComboBox.SelectedValue = "Ulubione";
+
+            removeTagSaveBtn_Click((MenuItem)sender, e);
+
+            if (removeTagComboBox.ItemsSource == null)
+            {
+                removeTagComboBox.Items.Clear();
+            }
+
+            removeTagComboBox.Text = bufftag;
+
+
+        }
+
     }
 }
