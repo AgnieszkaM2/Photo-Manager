@@ -76,6 +76,7 @@
                 <ComboBox x:Name="filtersType" Width="120" Height="35" FontSize="18" Margin="0,0,10,0" SelectionChanged="FiltersType_SelectionChanged">
                     <ComboBoxItem>Tag</ComboBoxItem>
                     <ComboBoxItem>Typ pliku</ComboBoxItem>
+                    <ComboBoxItem>Data</ComboBoxItem>
                 </ComboBox>
                 <TextBlock FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" Foreground="{DynamicResource TextContrast}">Wybierz filtr:</TextBlock>
                 <ComboBox x:Name="filterValues" Width="180" Height="35" FontSize="18" Margin="0,0,10,0" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="150">

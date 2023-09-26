@@ -55,8 +55,10 @@ namespace Photo_Manager.Views
             CurrentResources.CurrentGallery.Clear();
             string imagesDir = CurrentResources.ChosenPath;
             string[] filesindirectory = Directory.GetFiles(@imagesDir);
+
             foreach (var (s, newBtn, contextMenu) in from string s in filesindirectory
                                                      where Regex.IsMatch(s, @"\.jpg|\.png|\.jpeg|\.mp4|\.webm")
+                                                     orderby CurrentResources._sort ? File.GetCreationTime(s): File.GetCreationTime(s) descending
                                                      let newBtn = new ToggleButton()
                                                      let contextMenu = new ContextMenu()
                                                      select (s, newBtn, contextMenu))
@@ -152,6 +154,13 @@ namespace Photo_Manager.Views
                 else if (CurrentResources.FilterType == "Typ pliku")
                 {
                     FilterByFileType();
+                }
+                else if (CurrentResources.FilterType == "Data")
+                {
+                    if (filterValues.Text == "Najnowsze")
+                        CurrentResources._sort = true;
+                    if (filterValues.Text == "Najstarsze")
+                        CurrentResources._sort = false;
                 }
             }
 
@@ -654,6 +663,11 @@ namespace Photo_Manager.Views
                 string[] allFileTypes = { "jpg", "jpeg", "png", "mp4", "webm" };
                 filterValues.ItemsSource = allFileTypes;
             }
+            else if (filtersType.SelectedIndex == 2)
+            {
+                string[] allFileTypes = { "Najnowsze", "Najstarsze" };
+                filterValues.ItemsSource = allFileTypes;
+            }
         }
 
         private void btnFilterPanel_Click(object sender, RoutedEventArgs e)
@@ -694,6 +708,18 @@ namespace Photo_Manager.Views
                 CurrentResources.FilterType = "Typ pliku";
                 CurrentResources.Filtervalue = filterValues.SelectedItem.ToString();
                 FilterByFileType();
+                btnFiltersClear.Visibility = Visibility.Visible;
+            }
+            else if (filtersType.SelectedIndex == 2 && filterValues.SelectedItem != null)
+            {
+                CurrentResources.IsFilterSet = true;
+                CurrentResources.FilterType = "Data";
+                CurrentResources.Filtervalue = filterValues.SelectedItem.ToString();
+                if (filterValues.Text == "Najnowsze")
+                    CurrentResources._sort = true;
+                if (filterValues.Text == "Najstarsze")
+                    CurrentResources._sort = false;
+                PhotoGalleryView_Loaded(sender, e);
                 btnFiltersClear.Visibility = Visibility.Visible;
             }
         }
