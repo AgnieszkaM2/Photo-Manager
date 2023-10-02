@@ -16,6 +16,7 @@ namespace Photo_Manager.AdditionalResources
         public static string FilterType { get; set; }
         public static string Filtervalue { get; set;}
         public static string CurrentTheme { get; set;}
+        public static bool _sort { get; set; }
 
     }
 }

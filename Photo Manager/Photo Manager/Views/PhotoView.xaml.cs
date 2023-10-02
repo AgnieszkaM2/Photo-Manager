@@ -5,10 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -38,8 +40,9 @@ namespace Photo_Manager.Views
         private void PhotoView_Loaded(object sender, RoutedEventArgs e)
         {
             var imageDir = CurrentResources.ChosenImage;
-            int imageDirIndex = CurrentResources.CurrentGallery.IndexOf(imageDir); 
+            int imageDirIndex = CurrentResources.CurrentGallery.IndexOf(imageDir);
             mediaElement.Source = (new Uri(CurrentResources.CurrentGallery[imageDirIndex]));
+
         }
         
         public void btnReturnToGallery_Click(object sender, RoutedEventArgs e)
@@ -420,6 +423,26 @@ namespace Photo_Manager.Views
                 imageWindow.Width = 900;
                 imageWindow.Height = 650;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var _angle = Int16.Parse( mediaElement.Tag.ToString()) - 90;
+            mediaElement.LayoutTransform = new RotateTransform { Angle = _angle };
+            mediaElement.Tag = _angle.ToString();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var _angle = Int16.Parse(mediaElement.Tag.ToString()) + 90;
+            mediaElement.LayoutTransform = new RotateTransform { Angle = _angle };
+            mediaElement.Tag = _angle.ToString();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            mediaElement.LayoutTransform = new RotateTransform { Angle = 0 };
+            mediaElement.Tag = "0";
         }
     }
 }
