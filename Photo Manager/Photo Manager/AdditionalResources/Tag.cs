@@ -8,8 +8,8 @@ namespace Photo_Manager.AdditionalResources
 {
     public class Tag
     {
-        public string Name { get; set; }
-        public string PhotoPath { get; set; }
-        public string ParentDirectory { get; set; }
+        public required string Name { get; set; }
+        public required string PhotoPath { get; set; }
+        public required string ParentDirectory { get; set; }
     }
 }

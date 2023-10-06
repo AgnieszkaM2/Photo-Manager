@@ -8,15 +8,15 @@ namespace Photo_Manager.AdditionalResources
 {
     public class CurrentResources
     {
-        public static string ChosenImage { get; set; }
-        public static string ChosenPath { get; set; }
+        public static string? ChosenImage { get; set; }
+        public static string? ChosenPath { get; set; }
 
         public static List<string> CurrentGallery = new List<string>();
         public static bool IsFilterSet { get; set; }
-        public static string FilterType { get; set; }
-        public static string Filtervalue { get; set;}
-        public static string CurrentTheme { get; set;}
-        public static bool _sort { get; set; }
+        public static string? FilterType { get; set; }
+        public static string? FilterValue { get; set;}
+        public static string? CurrentTheme { get; set;}
+        public static bool Sort { get; set; }
 
     }
 }

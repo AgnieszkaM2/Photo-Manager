@@ -109,12 +109,12 @@ namespace Photo_Manager.Views
                 editTagControl.Visibility = Visibility.Hidden;
                 addTagMediaElement.Source = (new Uri(CurrentResources.ChosenImage));
 
-                string _path = @".\tags.json";
+                string _path = ResourcesPaths.SavedTagsPath;
 
                 if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-                if (Directory.Exists(CurrentResources.ChosenPath))
+                if (File.Exists(CurrentResources.ChosenImage))
                 {
                     var jsonData = System.IO.File.ReadAllText(_path);
                     var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
@@ -131,7 +131,7 @@ namespace Photo_Manager.Views
                 }
                 else
                 {
-                    var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                    var errorview = new ErrorView("Wybrany plik nie istnieje");
                     errorview.ShowDialog();
                 }
             }
@@ -147,12 +147,12 @@ namespace Photo_Manager.Views
                 editTagControl.Visibility = Visibility.Hidden;
                 removeTagMediaElement.Source = (new Uri(CurrentResources.ChosenImage));
 
-                string _path = @".\tags.json";
+                string _path = ResourcesPaths.SavedTagsPath;
 
                 if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-                if (Directory.Exists(CurrentResources.ChosenPath))
+                if (File.Exists(CurrentResources.ChosenImage))
                 {
                     var jsonData = System.IO.File.ReadAllText(_path);
                     var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
@@ -171,7 +171,7 @@ namespace Photo_Manager.Views
                 }
                 else
                 {
-                    var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                    var errorview = new ErrorView("Wybrany plik nie istnieje");
                     errorview.ShowDialog();
                 }
             }
@@ -187,12 +187,12 @@ namespace Photo_Manager.Views
                 removeTagControl.Visibility = Visibility.Hidden;
                 editTagMediaElement.Source = (new Uri(CurrentResources.ChosenImage));
 
-                string _path = @".\tags.json";
+                string _path = ResourcesPaths.SavedTagsPath;
 
                 if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-                if (Directory.Exists(CurrentResources.ChosenPath))
+                if (File.Exists(CurrentResources.ChosenImage))
                 {
                     var jsonData = System.IO.File.ReadAllText(_path);
                     var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
@@ -218,7 +218,7 @@ namespace Photo_Manager.Views
                 }
                 else
                 {
-                    var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                    var errorview = new ErrorView("Wybrany plik nie istnieje");
                     errorview.ShowDialog();
                 }
             }
@@ -227,17 +227,17 @@ namespace Photo_Manager.Views
 
         private void addTagSaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            string _path = @".\tags.json";
+            string _path = ResourcesPaths.SavedTagsPath;
 
             if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-            if (Directory.Exists(CurrentResources.ChosenPath))
+            if (File.Exists(CurrentResources.ChosenImage))
             {
                 var jsonData = System.IO.File.ReadAllText(_path);
                 var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
 
-                string newTag = null;
+                string? newTag = string.Empty;
                 if (addTagComboBox.SelectedItem != null)
                 {
                     newTag = addTagComboBox.SelectedItem.ToString();
@@ -278,7 +278,7 @@ namespace Photo_Manager.Views
             }
             else
             {
-                var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                var errorview = new ErrorView("Wybrany plik nie istnieje");
                 errorview.ShowDialog();
             }
 
@@ -289,17 +289,17 @@ namespace Photo_Manager.Views
 
         private void removeTagSaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            string _path = @".\tags.json";
+            string _path = ResourcesPaths.SavedTagsPath;
 
             if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-            if (Directory.Exists(CurrentResources.ChosenPath))
+            if (File.Exists(CurrentResources.ChosenImage))
             {
                 var jsonData = System.IO.File.ReadAllText(_path);
                 var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
 
-                string tagToRemove = null;
+                string? tagToRemove = string.Empty;
                 if (removeTagComboBox.SelectedItem != null)
                 {
                     tagToRemove = removeTagComboBox.SelectedItem.ToString();
@@ -322,7 +322,7 @@ namespace Photo_Manager.Views
             }
             else
             {
-                var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                var errorview = new ErrorView("Wybrany plik nie istnieje");
                 errorview.ShowDialog();
             }
 
@@ -331,18 +331,18 @@ namespace Photo_Manager.Views
 
         private void editTagSaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            string _path = @".\tags.json";
+            string _path = ResourcesPaths.SavedTagsPath;
 
             if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-            if (Directory.Exists(CurrentResources.ChosenPath))
+            if (File.Exists(CurrentResources.ChosenImage))
             {
                 var jsonData = System.IO.File.ReadAllText(_path);
                 var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
 
-                string oldTag = null;
-                string newTag = null;
+                string? oldTag = string.Empty;
+                string? newTag = string.Empty;
                 if (chooseEditTagComboBox.SelectedItem != null)
                 {
                     oldTag = chooseEditTagComboBox.SelectedItem.ToString();
@@ -395,7 +395,7 @@ namespace Photo_Manager.Views
             }
             else
             {
-                var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                var errorview = new ErrorView("Wybrany plik nie istnieje");
                 errorview.ShowDialog();
             }
 
@@ -427,7 +427,7 @@ namespace Photo_Manager.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var _angle = Int16.Parse( mediaElement.Tag.ToString()) - 90;
+            var _angle = Int16.Parse(mediaElement.Tag.ToString()) - 90;
             mediaElement.LayoutTransform = new RotateTransform { Angle = _angle };
             mediaElement.Tag = _angle.ToString();
         }

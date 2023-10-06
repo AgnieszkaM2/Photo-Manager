@@ -47,63 +47,63 @@ namespace Photo_Manager.Views
             btnFiltersClear.Visibility = Visibility.Hidden;
         }
         
-        ToggleButton _CurrentlyCheckedButton;
+        ToggleButton? _CurrentlyCheckedButton;
 
 
         private void PhotoGalleryView_Loaded(object sender, RoutedEventArgs e)
         {
             CurrentResources.CurrentGallery.Clear();
-            string imagesDir = CurrentResources.ChosenPath;
-            string[] filesindirectory = Directory.GetFiles(@imagesDir);
+            string? imagesDir = CurrentResources.ChosenPath;
+            string[] filesInDirectory = Directory.GetFiles(@imagesDir);
 
-            foreach (var (s, newBtn, contextMenu) in from string s in filesindirectory
-                                                     where Regex.IsMatch(s, @"\.jpg|\.png|\.jpeg|\.mp4|\.webm")
-                                                     orderby CurrentResources._sort ? File.GetCreationTime(s): File.GetCreationTime(s) descending
+            foreach (var (item, newBtn, contextMenu) in from string item in filesInDirectory
+                                                     where Regex.IsMatch(item, @"\.jpg|\.png|\.jpeg|\.mp4|\.webm")
+                                                     orderby CurrentResources.Sort ? File.GetCreationTime(item): File.GetCreationTime(item) descending
                                                      let newBtn = new ToggleButton()
                                                      let contextMenu = new ContextMenu()
-                                                     select (s, newBtn, contextMenu))
+                                                     select (item, newBtn, contextMenu))
             {
                 MenuItem menuItemClipboard = new MenuItem();
                 menuItemClipboard.Header = "Clipboard";
                 menuItemClipboard.Click += new RoutedEventHandler(clipboard_onclick);
-                menuItemClipboard.Tag = s;
+                menuItemClipboard.Tag = item;
                 MenuItem menuItemDisplay = new MenuItem();
                 menuItemDisplay.Header = "Wyświetl";
                 menuItemDisplay.Click += new RoutedEventHandler(btnPhotoView);
-                menuItemDisplay.Tag = s;
+                menuItemDisplay.Tag = item;
                 menuItemDisplay.SetBinding(Button.CommandProperty, new Binding("NavigatePhotoViewCommand"));
                 MenuItem menuItemAddtofavorites = new MenuItem();
                 menuItemAddtofavorites.Header = "Dodaj do ulubionych";
                 menuItemAddtofavorites.Click += new RoutedEventHandler(btnmenu_ADD_favorites);
-                menuItemAddtofavorites.Tag = s;
+                menuItemAddtofavorites.Tag = item;
                 MenuItem menuItemDeltofavorites = new MenuItem();
-                menuItemDeltofavorites.Header = "Unuń do ulubionych";
+                menuItemDeltofavorites.Header = "Usuń z ulubionych";
                 menuItemDeltofavorites.Click += new RoutedEventHandler(btnmenu_DEL_favorites);
-                menuItemDeltofavorites.Tag = s;
+                menuItemDeltofavorites.Tag = item;
 
                 contextMenu.Items.Add(menuItemDisplay);
                 contextMenu.Items.Add(menuItemClipboard);
                 contextMenu.Items.Add(menuItemAddtofavorites);
                 contextMenu.Items.Add(menuItemDeltofavorites);
 
-                if (Regex.IsMatch(s, @"\.jpg|\.png|\.jpeg"))
+                if (Regex.IsMatch(item, @"\.jpg|\.png|\.jpeg"))
                 {
 
                     newBtn.Content = new Image
                     {
                         Width = 180,
                         Height = 180,
-                        Source = new BitmapImage(new Uri(s)),
+                        Source = new BitmapImage(new Uri(item)),
                         VerticalAlignment = VerticalAlignment.Center
 
                     };
 
                 }
-                else if (Regex.IsMatch(s, @"\.mp4|\.webm"))
+                else if (Regex.IsMatch(item, @"\.mp4|\.webm"))
                 {
 
                     MediaPlayer player = new MediaPlayer { Volume = 0, ScrubbingEnabled = true };
-                    player.Open(new Uri(s));
+                    player.Open(new Uri(item));
                     player.Pause();
 
                     player.Position = TimeSpan.FromSeconds(1000);
@@ -117,7 +117,7 @@ namespace Photo_Manager.Views
                     }
                     rtb.Render(dv);
 
-                    BitmapFrame frame = BitmapFrame.Create(rtb).GetCurrentValueAsFrozen() as BitmapFrame;
+                    BitmapFrame? frame = BitmapFrame.Create(rtb).GetCurrentValueAsFrozen() as BitmapFrame;
 
                     newBtn.Content = new Image
                     {
@@ -136,11 +136,11 @@ namespace Photo_Manager.Views
 
                 newBtn.ContextMenu = contextMenu;
 
-                newBtn.Tag = s;
+                newBtn.Tag = item;
 
 
                 PhotoGalleryStackPanel.Children.Add(newBtn);
-                CurrentResources.CurrentGallery.Add(s);
+                CurrentResources.CurrentGallery.Add(item);
 
             }
 
@@ -158,9 +158,9 @@ namespace Photo_Manager.Views
                 else if (CurrentResources.FilterType == "Data")
                 {
                     if (filterValues.Text == "Najnowsze")
-                        CurrentResources._sort = true;
+                        CurrentResources.Sort = true;
                     if (filterValues.Text == "Najstarsze")
-                        CurrentResources._sort = false;
+                        CurrentResources.Sort = false;
                 }
             }
 
@@ -168,10 +168,10 @@ namespace Photo_Manager.Views
 
         private void FilterByTag()
         {
-            string filter = CurrentResources.Filtervalue;
+            string? filter = CurrentResources.FilterValue;
             if(string.IsNullOrEmpty(filter) == false) 
             {
-                string _path = @".\tags.json";
+                string _path = ResourcesPaths.SavedTagsPath;
                 if (!File.Exists(_path)) File.CreateText(_path).Close();
 
                 var jsonData = System.IO.File.ReadAllText(_path);
@@ -210,13 +210,13 @@ namespace Photo_Manager.Views
             btnFiltersClear.Visibility = Visibility.Hidden;
             CurrentResources.IsFilterSet = false;
             CurrentResources.FilterType = null;
-            CurrentResources.Filtervalue = null;
+            CurrentResources.FilterValue = null;
 
         }
 
         private void FilterByFileType()
         {
-            string filter = CurrentResources.Filtervalue;
+            string? filter = CurrentResources.FilterValue;
             if (string.IsNullOrEmpty(filter) == false)
             {
                 string regexPattern = @"([^\s]+(\.(?i)("+filter+"))$)";
@@ -299,12 +299,12 @@ namespace Photo_Manager.Views
                 editTagControl.Visibility = Visibility.Hidden;
                 addTagMediaElement.Source = (new Uri(CurrentResources.ChosenImage));
 
-                string _path = @".\tags.json";
+                string _path = ResourcesPaths.SavedTagsPath;
 
                 if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-                if (Directory.Exists(CurrentResources.ChosenPath))
+                if (File.Exists(CurrentResources.ChosenImage))
                 {
                     var jsonData = System.IO.File.ReadAllText(_path);
                     var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
@@ -321,7 +321,7 @@ namespace Photo_Manager.Views
                 }
                 else
                 {
-                    var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                    var errorview = new ErrorView("Wybrany plik nie istnieje");
                     errorview.ShowDialog();
                 }
             }
@@ -337,12 +337,12 @@ namespace Photo_Manager.Views
                 editTagControl.Visibility = Visibility.Hidden;
                 removeTagMediaElement.Source = (new Uri(CurrentResources.ChosenImage));
 
-                string _path = @".\tags.json";
+                string _path = ResourcesPaths.SavedTagsPath;
 
                 if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-                if (Directory.Exists(CurrentResources.ChosenPath))
+                if (File.Exists(CurrentResources.ChosenImage))
                 {
                     var jsonData = System.IO.File.ReadAllText(_path);
                     var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
@@ -361,7 +361,7 @@ namespace Photo_Manager.Views
                 }
                 else
                 {
-                    var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                    var errorview = new ErrorView("Wybrany plik nie istnieje");
                     errorview.ShowDialog();
                 }
             }
@@ -377,12 +377,12 @@ namespace Photo_Manager.Views
                 removeTagControl.Visibility = Visibility.Hidden;
                 editTagMediaElement.Source = (new Uri(CurrentResources.ChosenImage));
 
-                string _path = @".\tags.json";
+                string _path = ResourcesPaths.SavedTagsPath;
 
                 if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-                if (Directory.Exists(CurrentResources.ChosenPath))
+                if (File.Exists(CurrentResources.ChosenImage))
                 {
                     var jsonData = System.IO.File.ReadAllText(_path);
                     var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
@@ -408,7 +408,7 @@ namespace Photo_Manager.Views
                 }
                 else
                 {
-                    var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                    var errorview = new ErrorView("Wybrany plik nie istnieje");
                     errorview.ShowDialog();
                 }
             }
@@ -417,17 +417,17 @@ namespace Photo_Manager.Views
 
         private void addTagSaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            string _path = @".\tags.json";
+            string _path = ResourcesPaths.SavedTagsPath;
 
             if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-            if (Directory.Exists(CurrentResources.ChosenPath))
+            if (File.Exists(CurrentResources.ChosenImage))
             {
                 var jsonData = System.IO.File.ReadAllText(_path);
                 var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
 
-                string newTag=null;
+                string? newTag=string.Empty;
                 if(addTagComboBox.SelectedItem != null)
                 {
                     newTag = addTagComboBox.SelectedItem.ToString();
@@ -445,7 +445,7 @@ namespace Photo_Manager.Views
                     {
                         Name = newTag,
                         PhotoPath = CurrentResources.ChosenImage,
-                        ParentDirectory = CurrentResources.ChosenPath,
+                        ParentDirectory = CurrentResources.ChosenPath
                     });
 
                     jsonData = JsonConvert.SerializeObject(tagsList);
@@ -477,7 +477,7 @@ namespace Photo_Manager.Views
             }
             else
             {
-                var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                var errorview = new ErrorView("Wybrany plik nie istnieje");
                 errorview.ShowDialog();
             }
 
@@ -488,17 +488,17 @@ namespace Photo_Manager.Views
 
         private void removeTagSaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            string _path = @".\tags.json";
+            string _path = ResourcesPaths.SavedTagsPath;
 
             if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-            if (Directory.Exists(CurrentResources.ChosenPath))
+            if (File.Exists(CurrentResources.ChosenImage))
             {
                 var jsonData = System.IO.File.ReadAllText(_path);
                 var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
 
-                string tagToRemove = null;
+                string? tagToRemove = string.Empty;
                 if (removeTagComboBox.SelectedItem != null)
                 {
                     tagToRemove = removeTagComboBox.SelectedItem.ToString();
@@ -530,7 +530,7 @@ namespace Photo_Manager.Views
             }
             else
             {
-                var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                var errorview = new ErrorView("Wybrany plik nie istnieje");
                 errorview.ShowDialog();
             }
 
@@ -539,18 +539,18 @@ namespace Photo_Manager.Views
 
         private void editTagSaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            string _path = @".\tags.json";
+            string _path = ResourcesPaths.SavedTagsPath;
 
             if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-            if (Directory.Exists(CurrentResources.ChosenPath))
+            if (File.Exists(CurrentResources.ChosenImage))
             {
                 var jsonData = System.IO.File.ReadAllText(_path);
                 var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
 
-                string oldTag = null;
-                string newTag = null;
+                string? oldTag = string.Empty;
+                string? newTag = string.Empty;
                 if (chooseEditTagComboBox.SelectedItem != null)
                 {
                     oldTag = chooseEditTagComboBox.SelectedItem.ToString();
@@ -612,7 +612,7 @@ namespace Photo_Manager.Views
             }
             else
             {
-                var errorview = new ErrorView("Podana ścieżka nie istnieje");
+                var errorview = new ErrorView("Wybrany plik nie istnieje");
                 errorview.ShowDialog();
             }
 
@@ -627,36 +627,27 @@ namespace Photo_Manager.Views
 
             if (filtersType.SelectedIndex == 0)
             {
-                string _path = @".\tags.json";
+                string _path = ResourcesPaths.SavedTagsPath;
 
                 if (!File.Exists(_path)) File.CreateText(_path).Close();
 
 
-                if (Directory.Exists(CurrentResources.ChosenPath))
-                {
-                    var jsonData = System.IO.File.ReadAllText(_path);
-                    var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
+                var jsonData = System.IO.File.ReadAllText(_path);
+                var tagsList = JsonConvert.DeserializeObject<List<Tag>>(jsonData) ?? new List<Tag>();
 
-                    var allTags = (from x in tagsList
-                                   select x.Name)
+                var allTags = (from x in tagsList
+                               select x.Name)
                                .Distinct().ToList();
 
-                    if (allTags.Count > 0)
-                    {
-                        filterValues.ItemsSource = allTags;
-                    }
-                    else
-                    {
-                        filterValues.ItemsSource = emptyItemsSource;
-                    }
-
-
+                if (allTags.Count > 0)
+                {
+                    filterValues.ItemsSource = allTags;
                 }
                 else
                 {
-                    var errorview = new ErrorView("Podana ścieżka nie istnieje");
-                    errorview.ShowDialog();
+                    filterValues.ItemsSource = emptyItemsSource;
                 }
+                
             }
             else if (filtersType.SelectedIndex == 1)
             {
@@ -665,8 +656,8 @@ namespace Photo_Manager.Views
             }
             else if (filtersType.SelectedIndex == 2)
             {
-                string[] allFileTypes = { "Najnowsze", "Najstarsze" };
-                filterValues.ItemsSource = allFileTypes;
+                string[] sortTypes = { "Najnowsze", "Najstarsze" };
+                filterValues.ItemsSource = sortTypes;
             }
         }
 
@@ -698,7 +689,7 @@ namespace Photo_Manager.Views
             {
                 CurrentResources.IsFilterSet = true;
                 CurrentResources.FilterType = "Tag";
-                CurrentResources.Filtervalue = filterValues.SelectedItem.ToString();
+                CurrentResources.FilterValue = filterValues.SelectedItem.ToString();
                 FilterByTag();
                 btnFiltersClear.Visibility = Visibility.Visible;
             }
@@ -706,7 +697,7 @@ namespace Photo_Manager.Views
             {
                 CurrentResources.IsFilterSet = true;
                 CurrentResources.FilterType = "Typ pliku";
-                CurrentResources.Filtervalue = filterValues.SelectedItem.ToString();
+                CurrentResources.FilterValue = filterValues.SelectedItem.ToString();
                 FilterByFileType();
                 btnFiltersClear.Visibility = Visibility.Visible;
             }
@@ -714,11 +705,12 @@ namespace Photo_Manager.Views
             {
                 CurrentResources.IsFilterSet = true;
                 CurrentResources.FilterType = "Data";
-                CurrentResources.Filtervalue = filterValues.SelectedItem.ToString();
+                CurrentResources.FilterValue = filterValues.SelectedItem.ToString();
                 if (filterValues.Text == "Najnowsze")
-                    CurrentResources._sort = true;
+                    CurrentResources.Sort = true;
                 if (filterValues.Text == "Najstarsze")
-                    CurrentResources._sort = false;
+                    CurrentResources.Sort = false;
+
                 PhotoGalleryView_Loaded(sender, e);
                 btnFiltersClear.Visibility = Visibility.Visible;
             }
@@ -738,7 +730,7 @@ namespace Photo_Manager.Views
 
         private void btnmenu_ADD_favorites(object sender, RoutedEventArgs e)
         {
-            string bufftag = string.Empty;
+            string? bufftag = string.Empty;
 
             if (addTagComboBox.SelectedItem != null)
             {
@@ -753,7 +745,7 @@ namespace Photo_Manager.Views
 
         private void btnmenu_DEL_favorites(object sender, RoutedEventArgs e)
         {
-            string bufftag = string.Empty;
+            string? bufftag = string.Empty;
 
             var a = removeTagComboBox;
 

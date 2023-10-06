@@ -35,15 +35,7 @@ namespace Photo_Manager.Views
         }
 
         private void btnAddNewDirectory_Click(object sender, RoutedEventArgs e)
-        {
-            //string[] filesindirectory = Directory.GetFiles(@"C:\Git\Nowy folder");
-
-            //List<string> images = new List<string>(filesindirectory.Count());
-            //foreach (string s in filesindirectory)
-            //{
-            //    images.Add(String.Format("~/Images/{0}", System.IO.Path.GetFileName(s)));
-            //}
-        
+        {       
         }
 
         private void btnGallery_Click(object sender, RoutedEventArgs e)
@@ -52,20 +44,20 @@ namespace Photo_Manager.Views
 
         private void mainViewGridItems_Loaded(object sender, RoutedEventArgs e)
         {
-            string _path = @".\date.json";
+            string _path = ResourcesPaths.SavedDirectoriesPath;
 
             if (!File.Exists(_path)) File.CreateText(_path).Close();
 
             var jsonData = System.IO.File.ReadAllText(_path);
-            var dirList = JsonConvert.DeserializeObject<List<jsonfile>>(jsonData) ?? new List<jsonfile>();
+            var dirList = JsonConvert.DeserializeObject<List<Directories>>(jsonData) ?? new List<Directories>();
 
-            foreach (var (i, newBtn, _label, _stackPanel) in from i in dirList
+            foreach (var (dir, newBtn, _label, _stackPanel) in from dir in dirList
                                                              let newBtn = new Button()
                                                              let _label = new Label()
                                                              let _stackPanel = new StackPanel()
-                                                             select (i, newBtn, _label, _stackPanel))
+                                                             select (dir, newBtn, _label, _stackPanel))
             {
-                _label.Content = i.dir.ToString()[(i.dir.ToString().LastIndexOf("\\")..)];
+                _label.Content = dir.DirPath.ToString()[(dir.DirPath.ToString().LastIndexOf("\\")..)];
                 _label.SetResourceReference(Control.ForegroundProperty, "TextContrast");
                 
                 newBtn.Content = new Image
@@ -83,7 +75,7 @@ namespace Photo_Manager.Views
                 newBtn.SetResourceReference(Control.StyleProperty, "MainPanelItems");
                 newBtn.SetBinding(Button.CommandProperty, new Binding("NavigatePhotoGalleryViewCommand"));
                 newBtn.Click += new RoutedEventHandler(btnGalleryView);
-                newBtn.Tag = i.dir;
+                newBtn.Tag = dir.DirPath;
                 _stackPanel.Children.Add(newBtn);
                 _stackPanel.Children.Add(_label);
 

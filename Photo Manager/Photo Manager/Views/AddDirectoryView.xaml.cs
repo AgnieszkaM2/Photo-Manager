@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Photo_Manager.AdditionalResources;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -33,11 +34,6 @@ namespace Photo_Manager.Views
     /// Interaction logic for AddDirectoryView.xaml
     /// </summary>
     /// 
-    public class jsonfile 
-    {
-        public string dir { get; set; }
-    }
-
     public partial class AddDirectoryView : System.Windows.Controls.UserControl
     {
 
@@ -56,7 +52,7 @@ namespace Photo_Manager.Views
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            string _path = @".\date.json";
+            string _path = ResourcesPaths.SavedDirectoriesPath;
 
             if (!File.Exists(_path))File.CreateText(_path).Close();
 
@@ -65,14 +61,14 @@ namespace Photo_Manager.Views
             if (Directory.Exists(_newdir))
             {
                 var jsonData = System.IO.File.ReadAllText(_path);
-                var dirList = JsonConvert.DeserializeObject<List<jsonfile>>(jsonData) ?? new List<jsonfile>();
+                var dirList = JsonConvert.DeserializeObject<List<Directories>>(jsonData) ?? new List<Directories>();
 
-                if (dirList.Find(x => x.dir == _newdir) == null)
+                if (dirList.Find(x => x.DirPath == _newdir) == null)
                 {
 
-                    dirList.Add(new jsonfile()
+                    dirList.Add(new Directories()
                     {
-                        dir = _newdir,
+                        DirPath = _newdir,
                     });
 
                     jsonData = JsonConvert.SerializeObject(dirList);
